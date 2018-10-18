@@ -1,0 +1,6 @@
+
+alert(document.URL);
+
+
+
+
