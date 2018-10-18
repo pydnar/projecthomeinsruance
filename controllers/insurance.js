@@ -29,7 +29,7 @@ router.get("/api/users", function(req, res){
       users: data
     };
     console.log
-    res.render("index", insuranceObject);
+    res.json(insuranceObject);
   });
 })
 // router.put("/api/insurance/:id", function(req, res) {
