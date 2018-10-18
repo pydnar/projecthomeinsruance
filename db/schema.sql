@@ -8,6 +8,7 @@ lastname VARCHAR(50),
 phone VARCHAR(20),
 address VARCHAR(255),
 isagent BOOLEAN DEFAULT false,
+userpassword varchar(50),
 PRIMARY KEY (id_email)
 
 );
