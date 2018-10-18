@@ -43,46 +43,72 @@ var orm  = {
       }
       callback(result);
     });
+  },
 
-    // console.log(k);
-  // },
-  // create: function(table, cols, vals, callback) {
+  selectWhere: function(tablevalue, colToSearch, valOfCol, callback) {
+    var queryString = "SELECT * FROM ?? WHERE ?? = ?";
+    var k = connection.query(queryString, [tablevalue, colToSearch, valOfCol], function(err, result) {
+      if (err) {
+        throw err;
+      }
+      callback(result);
+    });
+  },
+
+
+  create: function(table, cols, vals, callback) {
      
-  //   var queryString = "INSERT INTO " + table;
+    var queryString = "INSERT INTO " + table;
 
-  //   queryString += " (";
-  //   queryString += cols.toString();
-  //   queryString += ") ";
-  //   queryString += "VALUES (";
-  //   queryString += printQuestionMarksHelper(vals.length);
-  //   queryString += ") ";
+    queryString += " (";
+    queryString += cols.toString();
+    queryString += ") ";
+    queryString += "VALUES (";
+    queryString += printQuestionMarksHelper(vals.length);
+    queryString += ") ";
 
-  //   console.log(`${vals}`);
+    console.log(`${vals}`);
 
-  //   connection.query(queryString, vals, function(err, result) {
-  //     if (err) {
-  //       throw err;
-  //     }
+    connection.query(queryString, vals, function(err, result) {
+      if (err) {
+        throw err;
+      }
 
-  //     callback(result);
-  //   });
-  // },
-  // update: function(table, objColVals, condition, callback) {
-  //   var queryString = "UPDATE " + table;
+      callback(result);
+    });
+  },
 
-  //   queryString += " SET ";
-  //   queryString += convertObjectsToSQLSyntax(objColVals);
-  //   queryString += " WHERE ";
-  //   queryString += condition;
+  update: function(table, objColVals, condition, callback) {
+    var queryString = "UPDATE " + table;
 
-  //   console.log(queryString);
-  //   connection.query(queryString, function(err, result) {
-  //     if (err) {
-  //       throw err;
-  //     }
-  //     callback(result);
-  //   });
+    queryString += " SET ";
+    queryString += convertObjectsToSQLSyntax(objColVals);
+    queryString += " WHERE ";
+    queryString += condition;
+
+    console.log(queryString);
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+      callback(result);
+    });
+  },
+
+  delete: function(table, condition, callback) {
+    var queryString = "DELETE FROM " + table;
+    queryString += " WHERE ";
+    queryString += condition;
+
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+
+      callback(result);
+    });
   }
+
 };
 
 module.exports = orm;
