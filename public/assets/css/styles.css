@@ -1,0 +1,17 @@
+table {
+border: black;
+}
+th {
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+}
+ td{
+  text-align: left;
+
+
+} 
+
+table, th, td {
+   border: 1px solid black;
+}
