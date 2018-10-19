@@ -1,3 +1,4 @@
+// Data 
 var orm = require("../config/orm.js");
 
 var users = {
@@ -23,6 +24,11 @@ var users = {
   },
   selectWhere: function(useremail, cb) {
     orm.selectWhere("homeassets", "id_email", useremail, function(res) {
+      cb(res);
+    });
+  },
+    selectuser: function(useremail, cb) {
+    orm.selectuser("users", "id_email", useremail, function(res) {
       cb(res);
     });
   }
