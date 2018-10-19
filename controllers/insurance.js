@@ -15,6 +15,17 @@ router.get("/", function(req, res) {
   });
 });
 
+router.get("/login", function(req, res) {
+  insurance.users.all(function(data) {
+    var insuranceObject = {
+      users: data
+    };
+  //   console.log(data)
+  //   //console.log(insuranceObject);
+    res.render("login", insuranceObject);
+  });
+});
+
 router.post("/api/insurance", function(req, res) {
  console.log(` What are thoses ${req.body}`);
 //   burger.create(["burger_name", "devoured"], [req.body.burger_name, req.body.devoured], function(result) {

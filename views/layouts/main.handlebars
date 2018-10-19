@@ -27,34 +27,14 @@
                     <a href="#" class="bluebrand-logo">INSURANCE FOR U!</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
                         <li><a id="time"></a></li>
-                        <li><a href="#">users</a></li>
-                        <a id="modelbtn" class="btn waves-effect waves-light modal-trigger" href="#login">login</a> {{!--
+                        <li><a href="login">login</a></li>
                         <li><a href="#">Fries</a></li>
-                        <li><a href="#">Sodas</a></li> --}}
+                        <li><a href="#">Sodas</a></li>
                     </ul>
                 </div>
-
             </div>
-
         </nav>
     </div>
-    <!-- The MFA MODEL -->
-    <div id="login" class="modal">
-
-        <div class="modal-content black-text">
-            <h6> Some Text </h6>
-            <label for="mfa-btn"></label>
-            <i class="material-icons prefix">sort</i>
-            <input pattern="\d{6}" type="text" id="signin" class="black-text">
-        </div>
-
-        <!--MODAL FOOTER  -->
-        <div class="modal-footer">
-            <button class="modal-action modal-close waves-effect waves-green btn">ok</button>
-        </div>
-    </div>
-
-
     <div class="container">
         <br>
         <div class="row">
@@ -68,38 +48,5 @@
         </div>
         {{{ body }}}
     </div>
-    <script>
-        $(document).ready(function () {
-      
-            var mfa = document.getElementById('modelbtn');
-            console.log(mfa);
-            mfa.addEventListener('click', function () {
-                
-            }, false);
-
-
-
-
-        });
-
-
-
-
-
-
-       //var login = document.getElementById("login");
-       // console.log(login);
-        //login.addEventListener(
-         //   "click",
-          //  function () {
-           //     var values = $("#login")
-            //        .val()
-             //       .trim();
-              //  console.log(values);
-            //},
-            //false
-        //);
-    </script>
 </body>
-
 </html>
