@@ -1,5 +1,5 @@
 var connection = require("../config/connection.js");
-console.log(connection);
+//console.log(connection);
 function printQuestionMarksHelper(num) {
  
   var arr = [];
@@ -67,7 +67,7 @@ var orm  = {
     queryString += printQuestionMarksHelper(vals.length);
     queryString += ") ";
 
-    console.log(`${vals}`);
+    //console.log(`${vals}`);
 
     connection.query(queryString, vals, function(err, result) {
       if (err) {
@@ -86,7 +86,7 @@ var orm  = {
     queryString += " WHERE ";
     queryString += condition;
 
-    console.log(queryString);
+    //console.log(queryString);
     connection.query(queryString, function(err, result) {
       if (err) {
         throw err;

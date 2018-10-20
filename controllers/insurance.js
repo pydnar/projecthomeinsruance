@@ -5,14 +5,7 @@ var router = express.Router();
 var insurance = require("../models/insurance.js");
 
 router.get("/", function(req, res) {
-  insurance.users.all(function(data) {
-    var insuranceObject = {
-      users: data
-    };
-    console.log(data);
-    //console.log(insuranceObject);
-    res.render("index", insuranceObject);
-  });
+    res.render("index");
 });
 
 router.get("/agent", function(req, res) {
@@ -32,6 +25,15 @@ router.get("/login", function(req, res) {
       users: data
     };
     res.render("login", insuranceObject);
+  });
+});
+
+router.get("/api/users", function(req, res) {
+  insurance.users.all(function(data) {
+    var insuranceObject = {
+      users: data
+    };
+    res.json(insuranceObject);
   });
 });
 
