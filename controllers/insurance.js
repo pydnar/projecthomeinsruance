@@ -15,38 +15,36 @@ router.get("/", function(req, res) {
   });
 });
 
+router.get("/agent", function(req, res) {
+  insurance.users.all(function(data) {
+    var insuranceObject = {
+      users: data
+    };
+    console.log(data);
+    //console.log(insuranceObject);
+    res.render("agent", insuranceObject);
+  });
+});
+
 router.get("/login", function(req, res) {
   insurance.users.all(function(data) {
     var insuranceObject = {
       users: data
     };
-    //   console.log(data)
-    //   //console.log(insuranceObject);
     res.render("login", insuranceObject);
   });
 });
 
-router.post("/api/users", function(req, res) {
-  console.log(` What are thoses ${req.body}`);
-  //   burger.create(["burger_name", "devoured"], [req.body.burger_name, req.body.devoured], function(result) {
-  // Send back the ID of the new quote
-  //   });
-  res.json({ id: result.insertId });
-});
-
 router.get("/api/users", function(req, res) {
-  console.log(` What are thoses ${req.body}`);
-
   insurance.users.all(function(data) {
     var insuranceObject = {
       users: data
     };
-
     res.json(insuranceObject);
   });
 });
-router.get("/api/users/:email", function(req, res) {
-  var chosen = req.params.email;
+
+router.get("/api/agents", function(req, res) {
   insurance.users.all(function(data) {
     var insuranceObject = {
       users: data
@@ -54,64 +52,76 @@ router.get("/api/users/:email", function(req, res) {
     for (var i = 0; i < insuranceObject["users"].length; i++) {
       var pair = insuranceObject["users"][i];
       for (n in pair) {
-        if (chosen== pair[n]) {
-          console.log(insuranceObject["users"][i]);
-            // insuranceObject["users"][i]
+        var user = pair[n];
+        if (n == "isagent") {
+          if (user == "1") {
+            res.json( insuranceObject["users"][i]);
+          }
         }
+        console.log(typeof findAllAgent);
       }
-      // $.each(pair, function(key, value) {
-      //   console.loq(key + ": " + value);
-      // });
-  
-    }
-
-    res.json(insuranceObject);
+    }    
   });
 });
 
-router.get("/api/users", function(req, res) {
+router.get("/agents", function(req, res) {
   insurance.users.all(function(data) {
     var insuranceObject = {
       users: data
     };
-    console.log;
-    res.json(insuranceObject);
+    for (var i = 0; i < insuranceObject["users"].length; i++) {
+      var pair = insuranceObject["users"][i];
+      for (n in pair) {
+        var user = pair[n];
+        if (n == "isagent") {
+          if (user == "1") {
+            // This is just one agent.
+            // We need a list of agent or an object of agents
+            res.render(insuranceObject["users"][i]);
+          }
+        }
+        console.log(typeof findAllAgent);
+      }
+    }    
   });
-
-  return res.json(insuranceObject);
 });
-
-// router.get("/api/users:email", function(req, res) {
-//   var chosen = req.params.email;
+// router.get("/api/agents/:email", function(req, res) {
 //   insurance.users.all(function(data) {
 //     var insuranceObject = {
 //       users: data
 //     };
-
-//     res.json(insuranceObject);
+//     for (var i = 0; i < insuranceObject["users"].length; i++) {
+//       var pair = insuranceObject["users"][i];
+//       for (n in pair) {
+//         var user = pair[n];
+//         if (n == "isagent") {
+//           if (user == "1") {
+//             res.json( insuranceObject["users"][i]);
+//           }
+//         }
+//         console.log(typeof findAllAgent);
+//       }
+//     }    
 //   });
 // });
 
-// router.put("/api/insurance/:id", function(req, res) {
-//   var condition = "id = " + req.params.id;
+router.get("/api/users/:email", function(req, res) {
+  var email = req.params.email;
+  insurance.users.all(function(data) {
+    var insuranceObject = {
+      users: data
+    };
 
-//   console.log("condition", condition);
+    for (var i = 0; i < insuranceObject["users"].length; i++) {
+      var pair = insuranceObject["users"][i];
+      for (n in pair) {
+        if (email == pair[n]) {
+          console.log("View one user:");
+          res.json(insuranceObject["users"][i]);
+        }
+      }
+    }
+  });
+});
 
-//   insurance.update(
-//     {
-//       devoured: req.body
-//     },
-//     condition,
-//     function(result) {
-//       if (result.changedRows === 0) {
-//         // User Doesn't exist in database
-//         return res.status(404).end();
-//       }
-//       res.status(200).end();
-
-//     }
-//   );
-// });
-
-// Export routes for server.js to use.
 module.exports = router;
