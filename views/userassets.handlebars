@@ -1,17 +1,27 @@
 <div class="row">
-    <div class="input-field col s12">
-        <i class="material-icons prefix">sort</i>
-        <input placeholder="email@email.com" type="text" id="searchemail" class="autocomplete ">
-        <label for="autocomplete-input">Enter email</label>
-    </div>
+<div class="col s12">
+
+	<table class="bordered highlight responsive-table" >
+		<tr>
+			<th>User ID</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Phone</th>
+			<th>address</th>
+			<th>Agent Status</th>
+		</tr>
+		<tbody>
+		 {{#each users}}
+			<tr>{{> agents/agents}} </tr>
+		{{/each}} 
+		</tbody>
+	</table>
+</div>
 </div>
 
 <div class="row">
     <div class="col s12">
         <h1> HOME Assets </h1>
-      {{#each homeassets}}
-                <tr>{{> homeassets/users}} </tr>
-                {{/each}}
         <table class="bordered highlight responsive-table">
             <tr>
                 <th>User ID</th>
@@ -26,9 +36,13 @@
             </tr>
             <tbody>
                 {{#each homeassets}}
-                <tr>{{> homeassets/assets}} </tr>
+                <tr  id="item">{{> homeassets/assets}} </tr>
                 {{/each}}
             </tbody>
         </table>
     </div>
 </div>
+
+<script>
+
+</script>
