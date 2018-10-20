@@ -8,6 +8,10 @@ router.get("/", function(req, res) {
     res.render("index");
 });
 
+router.get("/signup", function(req, res) {
+    res.render("signup");
+});
+
 router.get("/agent", function(req, res) {
   insurance.users.all(function(data) {
     var insuranceObject = {

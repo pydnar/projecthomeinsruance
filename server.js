@@ -23,8 +23,10 @@ app.set("view engine", "handlebars");
 var routes = require("./controllers/insurance.js");
 var homeassetsroutes = require("./controllers/homeassets.js");
 
+
 app.use(routes);
 app.use(homeassetsroutes);
+
 
 app.listen(PORT, function() {
   console.log("App now listening at localhost:" + PORT);
