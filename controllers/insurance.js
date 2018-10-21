@@ -5,11 +5,11 @@ var router = express.Router();
 var insurance = require("../models/insurance.js");
 
 router.get("/", function(req, res) {
-    res.render("index");
+  res.render("index");
 });
 
 router.get("/signup", function(req, res) {
-    res.render("signup");
+  res.render("signup");
 });
 
 router.get("/agent", function(req, res) {
@@ -17,9 +17,40 @@ router.get("/agent", function(req, res) {
     var insuranceObject = {
       users: data
     };
-    console.log(data);
+    // console.log(data);
     //console.log(insuranceObject);
     res.render("agent", insuranceObject);
+  });
+});
+
+router.get("/users", function(req, res) {
+  insurance.users.all(function(data) {
+    var insuranceObject = {
+      users: data
+    };
+
+    res.render("users", insuranceObject);
+  });
+});
+router.get("/users/:email", function(req, res) {
+  var email = req.params.email;
+  console.log(email);
+  insurance.users.all(function(data) {
+    var insuranceObject = {
+      users: data
+    };
+    console.log(insuranceObject["users"].length);
+    for (var i = 0; i < insuranceObject["users"].length; i++) {
+      var pair = insuranceObject["users"][i];
+      for (n in pair) {
+        if (email == pair[n]) {
+          //  console.log("View one user:");
+          res.render("users",insuranceObject["users"][i]);
+        }
+      }
+    }
+
+    res.render("users", insuranceObject);
   });
 });
 
@@ -61,12 +92,12 @@ router.get("/api/agents", function(req, res) {
         var user = pair[n];
         if (n == "isagent") {
           if (user == "1") {
-            res.json( insuranceObject["users"][i]);
+            res.json(insuranceObject["users"][i]);
           }
         }
-        console.log(typeof findAllAgent);
+        // console.log(typeof findAllAgent);
       }
-    }    
+    }
   });
 });
 
@@ -86,9 +117,9 @@ router.get("/agents", function(req, res) {
             res.render(insuranceObject["users"][i]);
           }
         }
-        console.log(typeof findAllAgent);
+        // console.log(typeof findAllAgent);
       }
-    }    
+    }
   });
 });
 // router.get("/api/agents/:email", function(req, res) {
@@ -107,7 +138,7 @@ router.get("/agents", function(req, res) {
 //         }
 //         console.log(typeof findAllAgent);
 //       }
-//     }    
+//     }
 //   });
 // });
 
@@ -122,7 +153,7 @@ router.get("/api/users/:email", function(req, res) {
       var pair = insuranceObject["users"][i];
       for (n in pair) {
         if (email == pair[n]) {
-          console.log("View one user:");
+          //  console.log("View one user:");
           res.json(insuranceObject["users"][i]);
         }
       }

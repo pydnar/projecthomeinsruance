@@ -18,8 +18,8 @@ router.get("/homeassets", function(req, res) {
     var assetsObject = {
       homeassets: data
     };
-    // console.log(data);
-    //console.log(insuranceObject);
+
+    //See if this break
     res.render("homeassets", assetsObject);
   });
 });

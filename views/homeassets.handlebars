@@ -22,22 +22,20 @@
                 <th>image</th>
             </tr>
             <tbody>
-                {{#each homeassets}}
-                <tr>{{> homeassets/assets}} </tr>
 
-                {{/each}}
+                {{!-- {{#each users}} 
+                {{#unless this.id_email}}
+                <tr>{{> users/users }} </tr>
+                {{/unless }}
+                {{/each}}  --}}
+                
+                
+                 {{#each users}}
+                <tr>{{> users/users }} </tr>
+                {{/each}} 
             </tbody>
         </table>
     </div>
 </div>
-<script>
-    var assets = "{{homeassets}}";
- 
-    console.log(assets);
-
-</script>
-
-<script src="/assets/js/assets.js">
 
 
-</script>

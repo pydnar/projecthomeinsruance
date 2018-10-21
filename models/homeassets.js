@@ -3,7 +3,7 @@ console.log("HERE");
 var homeassets = {
   all: function(cb) {
     orm.all("homeassets", function(res) {
-      console.log(res);
+      // console.log(res);
       cb(res);
     });
   }
@@ -11,5 +11,5 @@ var homeassets = {
 
 };
 
-console.log("HERE");
+// console.log("HERE");
 module.exports = homeassets;
