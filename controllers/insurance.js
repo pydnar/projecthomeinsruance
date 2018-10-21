@@ -5,53 +5,125 @@ var router = express.Router();
 var insurance = require("../models/insurance.js");
 
 router.get("/", function(req, res) {
+    res.render("index");
+});
+
+router.get("/agent", function(req, res) {
   insurance.users.all(function(data) {
     var insuranceObject = {
       users: data
     };
-    console.log(data)
+    console.log(data);
     //console.log(insuranceObject);
-    res.render("index", insuranceObject);
+    res.render("agent", insuranceObject);
   });
 });
 
-router.post("/api/insurance", function(req, res) {
- console.log(` What are thoses ${req.body}`);
-//   burger.create(["burger_name", "devoured"], [req.body.burger_name, req.body.devoured], function(result) {
-    // Send back the ID of the new quote
-//   });
- res.json({ id: result.insertId });
-});
-
-router.get("/api/users", function(req, res){
+router.get("/login", function(req, res) {
   insurance.users.all(function(data) {
     var insuranceObject = {
       users: data
     };
-    console.log
+    res.render("login", insuranceObject);
+  });
+});
+
+router.get("/api/users", function(req, res) {
+  insurance.users.all(function(data) {
+    var insuranceObject = {
+      users: data
+    };
     res.json(insuranceObject);
   });
-})
-// router.put("/api/insurance/:id", function(req, res) {
-//   var condition = "id = " + req.params.id;
+});
 
-//   console.log("condition", condition);
+router.get("/api/users", function(req, res) {
+  insurance.users.all(function(data) {
+    var insuranceObject = {
+      users: data
+    };
+    res.json(insuranceObject);
+  });
+});
 
-//   insurance.update(
-//     {
-//       devoured: req.body
-//     },
-//     condition,
-//     function(result) {
-//       if (result.changedRows === 0) {
-//         // User Doesn't exist in database
-//         return res.status(404).end();
+router.get("/api/agents", function(req, res) {
+  insurance.users.all(function(data) {
+    var insuranceObject = {
+      users: data
+    };
+    for (var i = 0; i < insuranceObject["users"].length; i++) {
+      var pair = insuranceObject["users"][i];
+      for (n in pair) {
+        var user = pair[n];
+        if (n == "isagent") {
+          if (user == "1") {
+            res.json( insuranceObject["users"][i]);
+          }
+        }
+        console.log(typeof findAllAgent);
+      }
+    }    
+  });
+});
+
+router.get("/agents", function(req, res) {
+  insurance.users.all(function(data) {
+    var insuranceObject = {
+      users: data
+    };
+    for (var i = 0; i < insuranceObject["users"].length; i++) {
+      var pair = insuranceObject["users"][i];
+      for (n in pair) {
+        var user = pair[n];
+        if (n == "isagent") {
+          if (user == "1") {
+            // This is just one agent.
+            // We need a list of agent or an object of agents
+            res.render(insuranceObject["users"][i]);
+          }
+        }
+        console.log(typeof findAllAgent);
+      }
+    }    
+  });
+});
+// router.get("/api/agents/:email", function(req, res) {
+//   insurance.users.all(function(data) {
+//     var insuranceObject = {
+//       users: data
+//     };
+//     for (var i = 0; i < insuranceObject["users"].length; i++) {
+//       var pair = insuranceObject["users"][i];
+//       for (n in pair) {
+//         var user = pair[n];
+//         if (n == "isagent") {
+//           if (user == "1") {
+//             res.json( insuranceObject["users"][i]);
+//           }
+//         }
+//         console.log(typeof findAllAgent);
 //       }
-//       res.status(200).end();
-
-//     }
-//   );
+//     }    
+//   });
 // });
 
-// Export routes for server.js to use.
+router.get("/api/users/:email", function(req, res) {
+  var email = req.params.email;
+  insurance.users.all(function(data) {
+    var insuranceObject = {
+      users: data
+    };
+
+    for (var i = 0; i < insuranceObject["users"].length; i++) {
+      var pair = insuranceObject["users"][i];
+      for (n in pair) {
+        if (email == pair[n]) {
+          console.log("View one user:");
+          res.json(insuranceObject["users"][i]);
+        }
+      }
+    }
+  });
+});
+
 module.exports = router;
