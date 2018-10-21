@@ -9,6 +9,9 @@
 <div class="row">
     <div class="col s12">
         <h1> HOME Assets </h1>
+      {{#each homeassets}}
+                <tr>{{> homeassets/users}} </tr>
+                {{/each}}
         <table class="bordered highlight responsive-table">
             <tr>
                 <th>User ID</th>
@@ -22,6 +25,7 @@
                 <th>image</th>
             </tr>
             <tbody>
+<<<<<<< HEAD
 
                 {{!-- {{#each users}} 
                 {{#unless this.id_email}}
@@ -39,3 +43,12 @@
 </div>
 
 
+=======
+                {{#each homeassets}}
+                <tr>{{> homeassets/assets}} </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+>>>>>>> 29f85f0c928df2a311882f555b27aaa3b00c5586

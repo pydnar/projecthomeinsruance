@@ -4,11 +4,12 @@ var router = express.Router();
 
 var assets = require("../models/homeassets.js");
 
-router.get("/api/homeassets", function(req, res) {
+router.get("/api/usersassets", function(req, res) {
   assets.all(function(data) {
     var assetsObject = {
       homeassets: data
     };
+ 
     res.json(assetsObject);
   });
 });
@@ -36,8 +37,8 @@ router.get("/homeassets", function(req, res) {
     var assetsObject = {
       homeassets: data
     };
-
-    //See if this break
+    // console.log(data);
+    //console.log(insuranceObject);
     res.render("homeassets", assetsObject);
   });
 });
