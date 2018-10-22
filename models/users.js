@@ -32,7 +32,13 @@ var users = {
     orm.selectUser("users", "id_email", useremail, function(res) {
       cb(res);
     });
-  }
+  },
+
+  joinselectOne: function(condition, cb){
+    orm. joinselectOne("itemname", "firstname", "lastname","id_email","id_email", "homeassets", "users", condition, function(res){
+      cb(res);
+    });
+  },
 };
 
 module.exports = users;
