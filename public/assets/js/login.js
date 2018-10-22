@@ -18,15 +18,14 @@ $(document).ready(function() {
       password
     };
     $.ajax("/login/" + email + "/" + password, {
-  
-   method: "POST",
+      method: "POST",
       async: false,
-  
 
       data: values
+      //Init values are coming from the login
     }).then(function(res) {
       userandassets = res;
-     
+
       var x = document.getElementById("form_data");
       if (x.style.display === "none") {
         x.style.display = "block";
@@ -47,11 +46,10 @@ $(document).ready(function() {
       }
 
       console.log(userandassets);
-      for(n in userandassets){
-        f = "/users/"+ userandassets[n]['id_email'];
+      for (n in userandassets) {
+        f = "/users/" + userandassets[n]["id_email"];
       }
-     window.location.href = f;
+      window.location.href = f;
     }); //End of ajax call
-
   }); //End of button click
 }); //End of document ready
