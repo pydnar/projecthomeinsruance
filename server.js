@@ -21,11 +21,10 @@ app.set("view engine", "handlebars");
 
 // Import routes and give the server access to them.
 var routes = require("./controllers/insurance.js");
-var homeassetsroutes = require("./controllers/homeassets.js");
+
 
 
 app.use(routes);
-app.use(homeassetsroutes);
 
 
 app.listen(PORT, function() {

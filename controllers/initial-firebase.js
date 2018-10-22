@@ -30,6 +30,7 @@ admin.auth().createCustomToken(uid)
             // ...
             console.log('LOGGED IN');
             console.log(customToken);
+            
         });
 
         firebase.auth().signOut().then(function () {

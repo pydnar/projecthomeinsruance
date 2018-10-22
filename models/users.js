@@ -27,11 +27,13 @@ var users = {
       cb(res);
     });
   },
-    selectuser: function(useremail, cb) {
-    orm.selectuser("users", "id_email", useremail, function(res) {
+  
+    selectUser: function(useremail, cb) {
+    orm.selectUser("users", "id_email", useremail, function(res) {
       cb(res);
     });
   }
 };
 
 module.exports = users;
+
