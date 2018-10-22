@@ -1,21 +1,21 @@
 <div class="row">
-    {{!--
-    <divclass="clearfix">
-</div> --}}
-<div class="col s12">
-    <h1> Login </h1>
-    <form>
-        <div class="form-group">
-            <label for="email">Email address:</label>
-            <input type="email" class="form-control" id="email">
-        </div>
-        <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="password">
-        </div>
 
-        <button id="button" type="submit" class="btn btn-default">Submit</button>
-    </form>
+    <div class="col s12">
 
+        <form id="form_data" action="/users" method="POST">
+            <h1> Login </h1>
+            <div class="form-group">
+                <label for="email">Email address:</label>
+                <input value="admin@admin.com" type="email" class="form-control" id="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input value="123" type="password" class="form-control" id="password">
+            </div>
+
+            <button id="button" type="submit" class="btn btn-default">Submit</button>
+        </form>
+
+    </div>
 </div>
-</div>
+<script src="/assets/js/login.js"></script>

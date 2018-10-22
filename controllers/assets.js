@@ -2,42 +2,68 @@ var express = require("express");
 
 var router = express.Router();
 
-var users = require("../models/users.js");
+var assets = require("../models/assets_models.js");
 
-router.get("/", function(req, res) {
-  res.render("index");
-});
+// router.get("/", function(req, res) {
+//   res.render("index");
+// });
 
-router.get("/users", function(req, res) {
-  users.selectWhere("admin@admin.com", function(data) {
-    var assets = {
-      users: data
-    };
-    
-
-    res.render("users", assets);
-  });
-});
-
-// router.get("/agent", function(req, res) {
-//   assets.all(function(data) {
+// router.get("/users", function(req, res) {
+//   users.selectWhere("admin@admin.com", function(data) {
 //     var assets = {
 //       users: data
 //     };
-//     console.log(assets)
-//     for (var i = 0; i < assets["assets"].length; i++) {
-//       var pair = assets["assets"][i];
-//       for (n in pair) {
-//         //if (email == pair["id_email"] && password === pair["userpassword"]) {
-//          // holduser.push(assets["users"][i]);
-//          //  break;
-//         //}
-//       }
-//     } //Found user   
+    
 
-//     res.render("agent", assets);
+//     res.render("users", assets);
 //   });
 // });
+
+router.get("/assets", function(req, res) {
+  assets.all(function(data) {
+    var assets = {
+      users: data
+    };
+    console.log(assets)
+
+    
+    // for (var i = 0; i < assets["assets"].length; i++) {
+    //   var pair = assets["assets"][i];
+    //   for (n in pair) {
+    //     //if (email == pair["id_email"] && password === pair["userpassword"]) {
+    //      // holduser.push(assets["users"][i]);
+    //      //  break;
+    //     //}
+    //   }
+    // } //Found user   
+
+    res.render("assets", assets);
+  });
+});
+
+router.get("/api/assets", function(req, res) {
+  assets.all(function(data) {
+    var assets = {
+      users: data
+    };
+    console.log(assets)
+    for (x in assets) {
+      console.log(assets[x]);
+    }
+    // for (var i = 0; i < assets["assets"].length; i++) {
+    //   var pair = assets["assets"][i];
+    //   for (n in pair) {
+    //     //if (email == pair["id_email"] && password === pair["userpassword"]) {
+    //      // holduser.push(assets["users"][i]);
+    //      //  break;
+    //     //}
+    //   }
+    // } //Found user   
+
+    res.json(assets["users"]);
+
+  });
+});
 
 router.get("/users/:email", function(req, res) {
   var email = req.params.email;
