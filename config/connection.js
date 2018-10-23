@@ -23,8 +23,6 @@ var config = {
   messagingSenderId: "784148365615"
 };
 
-module.exports = config;
-
 //  connection = mysql.createConnection({
 //   host: "localhost",
 //   port: 8889,
