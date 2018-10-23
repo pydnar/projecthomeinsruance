@@ -14,7 +14,6 @@ router.get("/users", function(req, res) {
       users: data
     };
     
-
     res.render("users", assets);
   });
 });
