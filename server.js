@@ -1,7 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 
-var PORT = process.env.PORT || 5000;
+var PORT = process.env.PORT || 3000;
 
 var app = express();
 
@@ -23,9 +23,6 @@ app.set("view engine", "handlebars");
 var routes = require("./controllers/insurance.js");
 var homeassetroutes = require("./controllers/assets.js");
 
-
-
-
 app.use(routes);
 app.use(homeassetroutes);
 
@@ -33,3 +30,6 @@ app.use(homeassetroutes);
 app.listen(PORT, function() {
   console.log("App now listening at localhost:" + PORT);
 });
+
+
+
