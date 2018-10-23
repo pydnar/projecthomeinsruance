@@ -116,7 +116,28 @@ var orm  = {
 
       callback(result);
     });
-  }
+  },
+
+  joinselect: function(table1col1, table2col1, table2col2, table2forightkey, table1primarykey, table1, table2, callback){
+    var queryString = "SELECT ??.??, ??.??, ??.??, ??.?? FROM ?? JOIN ?? on ??.??=??.?? ORDER BY ??.??";
+    var k = connection.query(queryString, [table2, table2col1,table2, table2col2, table2,table2forightkey, table1, table1col1, table1, table2, table1, table1primarykey, table2, table2forightkey, table1, table1primarykey], function(err, result) {
+      if (err) {
+        throw err;
+      }
+      callback(result);
+    });
+  },
+  
+  joinselectOne: function(table1col1, table2col1, table2col2, table2forightkey, table1primarykey, table1, table2, condition, callback){
+    var queryString = "SELECT ??.??, ??.??, ??.??, ??.?? FROM ?? JOIN ?? on ??.??=??.?? WHERE ??.??=?";
+    var k = connection.query(queryString, [table2, table2col1,table2, table2col2, table2,table2forightkey, table1, table1col1, table1, table2, table1, table1primarykey, table2, table2forightkey, table1, table1primarykey, condition], function(err, result) {
+      if (err) {
+        throw err;
+      }
+      callback(result);
+    });
+  },
+
 
 };
 
