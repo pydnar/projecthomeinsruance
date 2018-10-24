@@ -4,64 +4,50 @@ var router = express.Router();
 
 var assets = require("../models/assets_models.js");
 
-// router.get("/", function(req, res) {
-//   res.render("index");
-// });
-
-// router.get("/users", function(req, res) {
-//   users.selectWhere("admin@admin.com", function(data) {
-//     var assets = {
-//       users: data
-//     };
-    
-
-//     res.render("users", assets);
-//   });
-// });
-
 router.get("/assets", function(req, res) {
   assets.all(function(data) {
     var assets = {
-      users: data
+      homeassets: data
     };
-    console.log(assets)
-
-    
-    // for (var i = 0; i < assets["assets"].length; i++) {
-    //   var pair = assets["assets"][i];
-    //   for (n in pair) {
-    //     //if (email == pair["id_email"] && password === pair["userpassword"]) {
-    //      // holduser.push(assets["users"][i]);
-    //      //  break;
-    //     //}
-    //   }
-    // } //Found user   
+    console.log(assets);
 
     res.render("assets", assets);
   });
 });
 
-router.get("/api/assets", function(req, res) {
+router.get("/api/assets/", function(req, res) {
+  //Change update value in table itemactive
+
+  var id = req.params.id;
+  console.log(id);
   assets.all(function(data) {
     var assets = {
-      users: data
+      homeassets: data
     };
-    console.log(assets)
+    console.log(assets);
     for (x in assets) {
       console.log(assets[x]);
     }
-    // for (var i = 0; i < assets["assets"].length; i++) {
-    //   var pair = assets["assets"][i];
-    //   for (n in pair) {
-    //     //if (email == pair["id_email"] && password === pair["userpassword"]) {
-    //      // holduser.push(assets["users"][i]);
-    //      //  break;
-    //     //}
-    //   }
-    // } //Found user   
+    console.log("It  Ran");
+    res.json(assets);
+  });
+});
 
-    res.json(assets["users"]);
+router.get("/api/assets/:id", function(req, res) {
+  //Change update value in table itemactive
 
+  var id = req.params.id;
+  console.log(id);
+  assets.all(function(data) {
+    var assets = {
+      homeassets: data
+    };
+    console.log(assets);
+    for (x in assets) {
+      console.log(assets[x]);
+    }
+    console.log("It  Ran");
+    res.json(assets);
   });
 });
 
