@@ -72,14 +72,21 @@ router.get("/login", function (req, res) {
   });
 });
 
-router.put("/api/assets/:id", function (req, res) {
+router.put("/api/assets/:id/:switch", function (req, res) {
   var condition = "id = " + req.params.id;
+  var isactive = req.params.switch;
   console.log("condition", condition);
   assets.update({
-    itemactive: req.body.itemactive
-  }, condition)
+    itemactive: isactive
+  }, condition, function(result) {
+    if (result.changedRows == 0) {
+      // If no rows were changed, then the ID must not exist, so 404
+      return res.status(404).end();
+    } else {
+      res.status(200).end();
+    }
+  });
 });
-
 router.post("/login/:email/:password", function (req, res) {
   var email = req.params.email;
   var password = req.params.password;
