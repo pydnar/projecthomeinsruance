@@ -1,7 +1,7 @@
 // Require dotenv package.
 $(document).ready(() => {
 
-    Config for Firebase App
+   // Config for Firebase App
     var firebaseConfig = {
             apiKey: "AIzaSyBa96oWMfmbWVq09zsFd90703oO_VSJtck",
             authDomain: "project2auth.firebaseapp.com",
