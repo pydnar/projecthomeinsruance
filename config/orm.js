@@ -1,5 +1,5 @@
 var connection = require("../config/connection.js");
-//console.log(connection);
+
 function printQuestionMarksHelper(num) {
  
   var arr = [];
@@ -68,7 +68,8 @@ var orm  = {
   create: function(table, cols, vals, callback) {
      
     var queryString = "INSERT INTO " + table;
-
+    console.log(`col:\n${cols}`);
+    console.log(`val:\n${vals}`);
     queryString += " (";
     queryString += cols.toString();
     queryString += ") ";
@@ -76,7 +77,7 @@ var orm  = {
     queryString += printQuestionMarksHelper(vals.length);
     queryString += ") ";
 
-    //console.log(`${vals}`);
+    console.log(`${queryString}`);
 
     connection.query(queryString, vals, function(err, result) {
       if (err) {

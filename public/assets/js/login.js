@@ -1,6 +1,7 @@
 $(document).ready(function() {
   var f = "";
   $("#button").on("click", function() {
+ 
     var userandassets = {};
     event.preventDefault();
     var email = $("#email")
@@ -20,40 +21,21 @@ $(document).ready(function() {
     $.ajax("/login/" + email + "/" + password, {
       method: "POST",
       async: false,
-
       data: values
       //Init values are coming from the login
     }).then(function(res) {
       userandassets = res;
-
-      var x = document.getElementById("form_data");
-      if (x.style.display === "none") {
-        x.style.display = "block";
-      } else {
-        x.style.display = "none";
-      }
-      var x = document.getElementById("loggingID");
-      if (x.style.display === "none") {
-        x.style.display = "block";
-      } else {
-        x.style.display = "none";
-      }
-      var x = document.getElementById("userID");
-      if (x.style.display === "none") {
-        x.style.display = "block";
-      } else {
-        x.style.display = "none";
-      }
-
+      console.log(userandassets);
+    
       console.log(userandassets);
       for (n in userandassets) {
-        f = "/users/" + userandassets[n]["id_email"];
+        f = "/users/" + userandassets['firstname'];
       }
       window.location.href = f;
     }); //End of ajax call
   }); //End of button click
 
-    $(".update-form").on("submit", function(event) {
+  $(".update-form").on("submit", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
 
@@ -68,18 +50,17 @@ $(document).ready(function() {
     $.ajax("/api/homeassets/" + id, {
       type: "PUT",
       data: updatedQuote
-    }).then(
-      function() {
-        console.log("updated quote");
-        // Reload the page to get the updated list
-        location.assign("/");
-      }
-    );
+    }).then(function() {
+      console.log("updated quote");
+      // Reload the page to get the updated list
+      // location.assign("/");
+    });
   });
-
-
-
 }); //End of document ready
 
-
-
+// With the element initially shown, we can hide it slowly:
+// $( "#clickme" ).click(function() {
+//   $( "#book" ).hide( "slow", function() {
+//     alert( "Animation complete." );
+//   });
+// });
