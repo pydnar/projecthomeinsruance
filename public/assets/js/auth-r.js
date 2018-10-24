@@ -1,30 +1,31 @@
 // Require dotenv package.
 $(document).ready(() => {
 
-    // Grab data from user form
-    var email = $('#email').value.trim;
-    console.log(email);
-    var password = $('#password').value.trim;
-    console.log(password);
-
-    var values = {
-        email,
-        password
-    };
-    // Config for Firebase App
+    Config for Firebase App
     var firebaseConfig = {
-        apiKey: "AIzaSyBa96oWMfmbWVq09zsFd90703oO_VSJtck",
-        authDomain: "project2auth.firebaseapp.com",
-        databaseURL: "https://project2auth.firebaseio.com",
-        projectId: "project2auth",
-        storageBucket: "project2auth.appspot.com",
-        messagingSenderId: "784148365615"
-    };
+            apiKey: "AIzaSyBa96oWMfmbWVq09zsFd90703oO_VSJtck",
+            authDomain: "project2auth.firebaseapp.com",
+            databaseURL: "https://project2auth.firebaseio.com",
+            projectId: "project2auth",
+            storageBucket: "project2auth.appspot.com",
+            messagingSenderId: "784148365615"
+        };
 
     firebase.initializeApp(firebaseConfig);
 
 
     $('#login').click(function () {
+        // Grab data from user form
+        var email = $('#email').value.trim;
+        console.log(email);
+        var password = $('#password').value.trim;
+        console.log(password);
+
+        var values = {
+            email,
+            password
+        };
+        //
         firebase.auth().signInWithEmailAndPassword(email, password).then(function () {
             alert('Signin Success');
             var user = firebase.auth().currentUser();
