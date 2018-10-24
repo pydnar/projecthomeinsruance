@@ -1,4 +1,4 @@
-
+$("#assets").css("display", "block");
 function addsearchabledata(data) {
   for (var i = 0; i < data.Count; i++) {
     homeassetitems[data.itemname] = "";
