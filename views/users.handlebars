@@ -2,9 +2,9 @@
 	<div class="col s12">
 
 		{{!-- {{#each users}} {{users/assets }} {{/each}} --}}
-		{{!-- <a href="/addnew"></a> --}}
-		{{this.id}}
-		{{this.id_email}}
+	
+		<td><button type="submit" class=" waves-effect waves-light btn-small green" data-id="{{this.id}}">ADD</button></td>
+		 <hr/>
 		<table class="bordered highlight responsive-table">
 			<tr>
 
@@ -12,6 +12,8 @@
 				<th>PRICE</th>
 				<th>IMG</th>
 				<th></th>
+				<th></th>
+			
 
 			</tr>
 			<tbody>
@@ -19,9 +21,9 @@
 				{{#each users}}
 				<tr>{{> users/assets}}</tr>
 				{{/each}}	
-				{{#each users}}
+				{{!-- {{#each users}}
 				<tr>{{> users/userinfo}}</tr>
-				{{/each}}
+				{{/each}} --}}
 
 			</tbody>
 		</table>
@@ -32,3 +34,4 @@
     $("#agent").css("display", "none");
     $("#register").css("display", "none");
 </script>
+<script src="/assets/js/crudactions.js"></script>
