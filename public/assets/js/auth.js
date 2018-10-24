@@ -36,14 +36,14 @@ $(document).ready(() => {
 
                 data: values
                 //Init values are coming from the login
-              }).then(function(res) {
+            }).then(function (res) {
                 userandassets = res;
                 console.log(userandassets);
                 for (n in userandassets) {
-                  f = "/users/" + userandassets[n]["id_email"];
+                    f = "/users/" + userandassets[n]["id_email"];
                 }
                 window.location.href = f;
-              }); //End of ajax call
+            }); //End of ajax call
         }).catch(function (error) {
             var errorC = error.code;
             var errorM = error.message;
@@ -60,24 +60,47 @@ $(document).ready(() => {
                 console.log(errorC, errorM);
             })
         })
+        $('#signup').click(function () {// Make sure to preventDefault on a submit event.
+            event.preventDefault();
 
-        $('#signup').click(function () {
+            var newUser = {
+                id_email: $("#email")
+                    .val()
+                    .trim(),
+                firstname: $("#first")
+                    .val()
+                    .trim(),
+                lastname: $("#last")
+                    .val()
+                    .trim(),
+                phone: $("#phone")
+                    .val()
+                    .trim(),
+                address: $("#address")
+                    .val()
+                    .trim(),
+                isagent: 1,
+                userpassword: $("#password1")
+                    .val()
+                    .trim(),
+                useractive: 0
+            };
+            $.ajax("/api/newuser", {
+                type: "POST",
+                data: newUser
+            }).then(function (res) {
+                f =
+                    "/users/" +
+                    $("#email")
+                        .val()
+                        .trim();
+
+                console.log(newUser.firstname);
+
+                window.location.href = f;
+                //location.reload();
+            })
             firebase.auth().createUserWithEmailAndPassword(email, password).then(function () {
-                admin.auth().createCustomToken(email).then(function (customToken) {
-                    // Send token back to client
-                    firebase.auth().signInWithCustomToken(customToken).catch(function (error) {
-                        console.log('LOGGED IN');
-                        console.log(customToken);
-                        // Handle Errors here.
-                        var errorC = error.code;
-                        var errorM = error.message;
-                        console.log(errorC, errorM);
-                    }).catch(function (error) {
-                        var errorC = error.code;
-                        var errorM = error.message;
-                        console.log(errorC, errorM);
-                    });
-                });
             });
         });
     });

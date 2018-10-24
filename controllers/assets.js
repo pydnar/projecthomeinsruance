@@ -78,7 +78,7 @@ router.put("/api/assets/:id/:switch", function (req, res) {
   console.log("condition", condition);
   assets.update({
     itemactive: isactive
-  }, condition, function(result) {
+  }, condition, function (result) {
     if (result.changedRows == 0) {
       // If no rows were changed, then the ID must not exist, so 404
       return res.status(404).end();
@@ -87,6 +87,23 @@ router.put("/api/assets/:id/:switch", function (req, res) {
     }
   });
 });
+
+router.post("/api/assets/:itemName/:custunitvalue/:id_email/:quantity", function (req, res) {
+  assets.create(Object.keys(req.params),
+  Object.values(req.params),function (data) {
+    var assets = {
+      homeassets: data
+    };
+    
+    // itemname: req.params.itemName,
+    // unitvalue: req.params.custunitvalue,
+    // email: req.params.id_email,
+    // quantity: req.params.quantity,
+    console.log(assets);
+    res.render("assets", assets);
+  });
+});
+
 router.post("/login/:email/:password", function (req, res) {
   var email = req.params.email;
   var password = req.params.password;
