@@ -14,10 +14,6 @@ if (process.env.JAWSDB_URL) {
 connection.connect();
 module.exports = connection;
 
-
-
-// module.exports = config;
-
 //  connection = mysql.createConnection({
 //   host: "localhost",
 //   port: 8889,
