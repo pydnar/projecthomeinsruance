@@ -1,4 +1,3 @@
-// Require dotenv package.
 $(document).ready(() => {
     var f = "";
 
@@ -15,8 +14,8 @@ $(document).ready(() => {
     firebase.initializeApp(firebaseConfig);
 
 
-    $('#login').click(function () {
-        
+    $('#submitLogin').click(function () {
+        alert('Login func is running');
         // Grab data from user form
         event.preventDefault();
         var email = $('#email').val();
@@ -34,11 +33,11 @@ $(document).ready(() => {
             $.ajax("/login/" + email + "/" + password, {
                 method: "POST",
                 async: false,
-          
+
                 data: values
                 //Init values are coming from the login
               }).then(function(res) {
-                userandassets = res;       
+                userandassets = res;
                 console.log(userandassets);
                 for (n in userandassets) {
                   f = "/users/" + userandassets[n]["id_email"];
