@@ -4,16 +4,6 @@
 // var serviceAcct = require("../config/project2auth.json");
 // var orm = require("../../../config/orm.js");
 
-// Require Statements 
-var admin = require('firebase-admin');
-var serviceAccount = require('../config/project2auth.json');
-
-// Consume keys from .env file.
-
-  admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount),
-    });
-
 // Leaving in case anyone wants to test this method from CLI using Node.
 // var email = process.argv[2];
 // var password = process.argv[3];
@@ -24,7 +14,7 @@ $(document).ready(() => {
     var f = "";
 
     var config = {
-        apiKey: process.env.FIREBASE_KEY,
+        apiKey: "AIzaSyBa96oWMfmbWVq09zsFd90703oO_VSJtck",
         authDomain: "project2auth.firebaseapp.com",
         databaseURL: "https://project2auth.firebaseio.com",
         projectId: "project2auth",

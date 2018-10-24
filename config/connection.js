@@ -14,16 +14,9 @@ if (process.env.JAWSDB_URL) {
 connection.connect();
 module.exports = connection;
 
-var config = {
-  apiKey: "AIzaSyBa96oWMfmbWVq09zsFd90703oO_VSJtck",
-  authDomain: "project2auth.firebaseapp.com",
-  databaseURL: "https://project2auth.firebaseio.com",
-  projectId: "project2auth",
-  storageBucket: "project2auth.appspot.com",
-  messagingSenderId: "784148365615"
-};
 
-module.exports = config;
+
+// module.exports = config;
 
 //  connection = mysql.createConnection({
 //   host: "localhost",
