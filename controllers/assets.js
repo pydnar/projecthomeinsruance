@@ -4,8 +4,8 @@ var router = express.Router();
 
 var assets = require("../models/assets_models.js");
 
-router.get("/assets", function(req, res) {
-  assets.all(function(data) {
+router.get("/assets", function (req, res) {
+  assets.all(function (data) {
     var assets = {
       homeassets: data
     };
@@ -15,12 +15,12 @@ router.get("/assets", function(req, res) {
   });
 });
 
-router.get("/api/assets/", function(req, res) {
+router.get("/api/assets/", function (req, res) {
   //Change update value in table itemactive
 
   var id = req.params.id;
   console.log(id);
-  assets.all(function(data) {
+  assets.all(function (data) {
     var assets = {
       homeassets: data
     };
@@ -33,12 +33,12 @@ router.get("/api/assets/", function(req, res) {
   });
 });
 
-router.get("/api/assets/:id", function(req, res) {
+router.get("/api/assets/:id", function (req, res) {
   //Change update value in table itemactive
 
   var id = req.params.id;
   console.log(id);
-  assets.all(function(data) {
+  assets.all(function (data) {
     var assets = {
       homeassets: data
     };
@@ -51,9 +51,9 @@ router.get("/api/assets/:id", function(req, res) {
   });
 });
 
-router.get("/users/:email", function(req, res) {
+router.get("/users/:email", function (req, res) {
   var email = req.params.email;
-  users.selectWhere(email, function(data) {
+  users.selectWhere(email, function (data) {
     var assets = {
       users: data
     };
@@ -62,8 +62,8 @@ router.get("/users/:email", function(req, res) {
   });
 });
 
-router.get("/login", function(req, res) {
-  users.all(function(data) {
+router.get("/login", function (req, res) {
+  users.all(function (data) {
     var insuranceObject = {
       users: data
     };
@@ -72,12 +72,20 @@ router.get("/login", function(req, res) {
   });
 });
 
-router.post("/login/:email/:password", function(req, res) {
+router.put("/api/assets/:id", function (req, res) {
+  var condition = "id = " + req.params.id;
+  console.log("condition", condition);
+  assets.update({
+    itemactive: req.body.itemactive
+  }, condition)
+});
+
+router.post("/login/:email/:password", function (req, res) {
   var email = req.params.email;
   var password = req.params.password;
 
   var holduser = [];
-  users.all(function(data) {
+  users.all(function (data) {
     var insuranceObject = {
       users: data
     };
@@ -93,7 +101,7 @@ router.post("/login/:email/:password", function(req, res) {
     } //Found user
     //Now find homeassets
   });
-  users.all(function(data) {
+  users.all(function (data) {
     var assetsObject = {
       homeassets: data
     };

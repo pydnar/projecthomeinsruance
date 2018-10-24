@@ -2,24 +2,28 @@
 
     <div class="col s12">
 
-        <form id="form_data" action="/users" method="POST">
+        <form id="form_data">
+        <span id="loginAlert"></span>
             <h1> Login </h1>
-            <div class="form-group">
+            <span id=<div class="form-group">
                 <label for="email">Email address:</label>
-                <input value="admin@admin.com" type="email" class="form-control" id="email">
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input value="123" type="password" class="form-control" id="password">
-            </div>
-
-            <button id="button" type="submit" class="btn btn-default">Submit</button>
-        </form>
-
+                <input type="email" class="form-control" id="email">
     </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password">
+    </div>
+
+    <button id="login" type="submit" class="btn btn-default">Submit</button>
+    </form>
+
 </div>
-<script src="/assets/js/login.js"></script>
+<br><br>
+<strong>New Users, please sign up!</strong>
+<a href="signup" id="signup" class="btn orange lighten-2">Sign Up!</a>
+</div>
 <script>
     $("#login").css("display", "none");
     $("#agent").css("display", "none"); 
 </script>
+<script src="/assets/js/auth.js"></script>
