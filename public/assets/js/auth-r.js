@@ -1,6 +1,4 @@
 // Require dotenv package.
-require('dotenv').config();
-
 $(document).ready(() => {
 
     // Grab data from user form
@@ -15,7 +13,7 @@ $(document).ready(() => {
     };
     // Config for Firebase App
     var firebaseConfig = {
-        apiKey: process.env.FIREBASE_APIKEY,
+        apiKey: "AIzaSyBa96oWMfmbWVq09zsFd90703oO_VSJtck",
         authDomain: "project2auth.firebaseapp.com",
         databaseURL: "https://project2auth.firebaseio.com",
         projectId: "project2auth",
