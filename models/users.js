@@ -35,7 +35,7 @@ var users = {
   },
 
   joinselectOne: function(condition, cb){
-    orm. joinselectOne("itemname", "firstname", "lastname","id_email","id_email", "homeassets", "users", condition, function(res){
+    orm. joinselectOne("itemname", "totalcustvalue", "totalamazonvalue", "firstname", "lastname","id_email","id_email", "homeassets", "users", condition, function(res){
       cb(res);
     });
   },
