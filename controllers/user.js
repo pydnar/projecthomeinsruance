@@ -4,42 +4,37 @@ var express = require("express");
 var router = express.Router();
 
 var user = require("../models/users.js");
+
 router.get("/register", function(req, res) {
   res.render("register");
 });
 
-var user = require("../models/users.js");
-router.post("/api/user", function(req, res) {
-  user.create(
-    [
-      "id_email",
-      "firstname",
-      "lastname",
-      "phone",
-      "address",
-      "isagent",
-      "userpassword",
-      "useractive"
-    ],
-    [
-      "Test120duser.com",
-      "test",
-      "user",
-      "1111111111",
-      "12345 test street",
-      1,
-      "super secret",
-      0
-    ],
-    function(result) {
-      // Send back the ID of the new quote
+router.post("/api/newuser", function(req, res) {
+  //  console.log(Object.values(req.body));
+  console.log(req.body.id_email);
+  user.create([Object.keys(req.body)], [Object.values(req.body)], function(
+    result
+  ) {
+    // Send back the ID of the new quote
+    var userdata = {
+      users: result
+    };
+
+    console.log("Here");
+    user.selectUser(req.body.id_email, function(data) {
+      var userdata = {
+        user: data
+      };
+      console.log(userdata.user);
+     
       if (result.affectedRow !== 1) {
-        res.json({ sendtoview: "Test120duser.com" });
+        console.log("Users Added");
+        res.render("users", userdata);
       } else {
-        res.json({ sendtoview: "Could not add user!" });
+        res.render("register");
       }
-    }
-  );
+    });
+  });
 });
 
 //router.put("/api/user", function(req, res) {

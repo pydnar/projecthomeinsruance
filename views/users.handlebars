@@ -3,8 +3,11 @@
 
 		{{!-- {{#each users}} {{users/assets }} {{/each}} --}}
 		{{!-- <a href="/addnew"></a> --}}
+		{{this.id}}
+		{{this.id_email}}
 		<table class="bordered highlight responsive-table">
 			<tr>
+
 				<th>ITEM</th>
 				<th>PRICE</th>
 				<th>IMG</th>
@@ -12,9 +15,12 @@
 
 			</tr>
 			<tbody>
-
+		
 				{{#each users}}
 				<tr>{{> users/assets}}</tr>
+				{{/each}}	
+				{{#each users}}
+				<tr>{{> users/userinfo}}</tr>
 				{{/each}}
 
 			</tbody>

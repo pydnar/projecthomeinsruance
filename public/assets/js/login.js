@@ -1,17 +1,7 @@
 $(document).ready(function() {
   var f = "";
   $("#button").on("click", function() {
-    //  $("p").hide();
-
-    // <li><a id="time"></a></li>
-    //             <li><a id="login" href="login">LOGIN</a></li>
-    //             <li class="hidden"><a id="assets" href="users">MY ASSETS</a></li>
-    //             <li><a id="agent" href="agent">AGENT</a></li>
-    //             <li><a id="register" href="register">REGISTER</a></li>
-
-    //$("#assets").css("display", "none");
  
-
     var userandassets = {};
     event.preventDefault();
     var email = $("#email")
@@ -35,17 +25,11 @@ $(document).ready(function() {
       //Init values are coming from the login
     }).then(function(res) {
       userandassets = res;
-
-      var x = document.getElementById("form_data");
-      if (x.style.display === "none") {
-        x.style.display = "block";
-      } else {
-        x.style.display = "none";
-      }
-
+      console.log(userandassets);
+    
       console.log(userandassets);
       for (n in userandassets) {
-        f = "/users/" + userandassets[n]["id_email"];
+        f = "/users/" + userandassets['firstname'];
       }
       window.location.href = f;
     }); //End of ajax call
