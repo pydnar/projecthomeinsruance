@@ -16,9 +16,10 @@ $(document).ready(() => {
 
     $('#login').click(function () {
         // Grab data from user form
-        var email = $('#email').value.trim;
+        event.preventDefault();
+        var email = $('#email').val();
         console.log(email);
-        var password = $('#password').value.trim;
+        var password = $('#password').val();
         console.log(password);
 
         var values = {
@@ -28,15 +29,15 @@ $(document).ready(() => {
         //
         firebase.auth().signInWithEmailAndPassword(email, password).then(function () {
             alert('Signin Success');
-            var user = firebase.auth().currentUser();
-            USER = {
-                // Confirm if this is the write parameter to pull back.
-                name: user.firstName,
-                email: user.email,
-                address: user.address,
-                emailVerified: user.emailVerified,
-                uid: user.uid,
-            };
+            // var user = firebase.auth().currentUser();
+            // USER = {
+            //     // Confirm if this is the write parameter to pull back.
+            //     name: user.firstName,
+            //     email: user.email,
+            //     address: user.address,
+            //     emailVerified: user.emailVerified,
+            //     uid: user.uid,
+            // };
 
             $.ajax("/login/" + email + "/" + password, {
                 method: "POST",
