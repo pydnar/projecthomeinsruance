@@ -52,32 +52,34 @@ $(document).ready(function() {
       window.location.href = f;
     }); //End of ajax call
   }); //End of button click
+
+    $(".update-form").on("submit", function(event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+
+    var updatedQuote = {
+      author: "",
+      quote: '$("#quo").val().trim()'
+    };
+
+    var id = $(this).data("id");
+
+    // Send the POST request.
+    $.ajax("/api/homeassets/" + id, {
+      type: "PUT",
+      data: updatedQuote
+    }).then(
+      function() {
+        console.log("updated quote");
+        // Reload the page to get the updated list
+        location.assign("/");
+      }
+    );
+  });
+
+
+
 }); //End of document ready
 
 
 
-
-
-  $(".create-form").on("submit", function(event) {
-    // Make sure to preventDefault on a submit event.
-    event.preventDefault();
-
-    var newBurger = {
-      burger_name: $("#bur").val().trim(),
-      devoured: $("[name=devoured]:checked").val().trim()
-    };
-  
-    // Send the POST request.
-    $.ajax("/api/burgers", {
-      type: "POST",
-      data: newBurger
-     
-    }).then(
-      function() {
-        console.log("created new Burger");
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-  });
-});
