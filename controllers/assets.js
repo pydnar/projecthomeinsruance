@@ -4,6 +4,21 @@ var router = express.Router();
 
 var assets = require("../models/assets_models.js");
 
+
+router.get("/assetms", function (req, res) {
+  res.render("assetms");
+})
+
+router.post("/assetms", function (req, res) {
+  assets.create([Object.keys(req.body)], [Object.values(req.body)], function (result) {
+    var assetdata = {
+      assets: result
+    }
+    console.log(assetdata);
+    res.render("/users/" + assetdata.id_email);
+  });
+});
+
 router.get("/assets", function (req, res) {
   assets.all(function (data) {
     var assets = {
@@ -90,18 +105,18 @@ router.put("/api/assets/:id/:switch", function (req, res) {
 
 router.post("/api/assets/:itemName/:custunitvalue/:id_email/:quantity", function (req, res) {
   assets.create(Object.keys(req.params),
-  Object.values(req.params),function (data) {
-    var assets = {
-      homeassets: data
-    };
-    
-    // itemname: req.params.itemName,
-    // unitvalue: req.params.custunitvalue,
-    // email: req.params.id_email,
-    // quantity: req.params.quantity,
-    console.log(assets);
-    res.render("assets", assets);
-  });
+    Object.values(req.params), function (data) {
+      var assets = {
+        homeassets: data
+      };
+
+      // itemname: req.params.itemName,
+      // unitvalue: req.params.custunitvalue,
+      // email: req.params.id_email,
+      // quantity: req.params.quantity,
+      console.log(assets);
+      res.render("assets", assets);
+    });
 });
 
 router.post("/login/:email/:password", function (req, res) {
