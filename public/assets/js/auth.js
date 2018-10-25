@@ -30,6 +30,9 @@ $(document).ready(() => {
         //
         firebase.auth().signInWithEmailAndPassword(email, password).then(function () {
             alert('Signin Success')
+            var USER = firebase.auth().currentUser;
+            console.log(Object.keys(USER));
+            console.log(Object.values(USER));
             $.ajax("/login/" + email + "/" + password, {
                 method: "POST",
                 async: false,

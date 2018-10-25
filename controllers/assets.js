@@ -103,6 +103,15 @@ router.put("/api/assets/:id/:switch", function (req, res) {
   });
 });
 
+router.put("/api/assets/:itemName/:custunitvalue/:id_email/:quantity", function (req, res){
+  assets.update(Object.keys(req.params), Object.values(req.params), function (data) {
+    var assets = {
+      homeassets: data
+    };
+    res.render("assets", assets);
+  })
+})
+
 router.post("/api/assets/:itemName/:custunitvalue/:id_email/:quantity", function (req, res) {
   assets.create(Object.keys(req.params),
     Object.values(req.params), function (data) {
