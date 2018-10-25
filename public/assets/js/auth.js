@@ -53,58 +53,65 @@ $(document).ready(() => {
             console.log(errorC, errorM);
             $('#loginAlert').text('There is no user record corresponding to this');
         });
+    });
 
-        $('#signout').click(function () {
-            auth.signOut().then(function () {
-                console.log("Signout Success for user =>" + USER.email);
-            }).catch(function (error) {
-                var errorC = error.code;
-                var errorM = error.message;
-                console.log(errorC, errorM);
-            })
+
+    $('#submitSignout').click(function () {
+        auth.signOut().then(function () {
+            console.log("Signout Success for user =>" + USER.email);
+        }).catch(function (error) {
+            var errorC = error.code;
+            var errorM = error.message;
+            console.log(errorC, errorM);
         })
-        $('#signup').click(function () {// Make sure to preventDefault on a submit event.
-            event.preventDefault();
+    });
 
-            var newUser = {
-                id_email: $("#email")
-                    .val()
-                    .trim(),
-                firstname: $("#first")
-                    .val()
-                    .trim(),
-                lastname: $("#last")
-                    .val()
-                    .trim(),
-                phone: $("#phone")
-                    .val()
-                    .trim(),
-                address: $("#address")
-                    .val()
-                    .trim(),
-                isagent: 1,
-                userpassword: $("#password1")
-                    .val()
-                    .trim(),
-                useractive: 0
-            };
-            $.ajax("/api/newuser", {
-                type: "POST",
-                data: newUser
-            }).then(function (res) {
-                f =
-                    "/users/" +
-                    $("#email")
-                        .val()
-                        .trim();
 
-                console.log(newUser.firstname);
+    $('#submitSignup').click(function () {// Make sure to preventDefault on a submit event.
+        alert("I AM RUNNING!")
+        event.preventDefault();
+        var newUser = {
+            id_email: $("#email")
+                .val()
+                .trim(),
+            firstname: $("#first")
+                .val()
+                .trim(),
+            lastname: $("#last")
+                .val()
+                .trim(),
+            phone: $("#phone")
+                .val()
+                .trim(),
+            address: $("#address")
+                .val()
+                .trim(),
+            isagent: 1,
+            userpassword: $("#password")
+                .val()
+                .trim(),
+            useractive: 0
+        };
+        $.ajax("/api/newuser", {
+            type: "POST",
+            data: newUser
+        }).then(function (res) {
+            f =
+                "/users/" +
+                $("#email")
+                    .val()
+                    .trim();
 
-                window.location.href = f;
-                //location.reload();
-            })
-            firebase.auth().createUserWithEmailAndPassword(email, password).then(function () {
+            // Create new user in firebase now.
+
+            firebase.auth().createUserWithEmailAndPassword(newUser.id_email, newUser.userpassword).then(function () {
+                alert('new user created');
             });
-        });
+
+            console.log(newUser.firstname);
+
+            window.location.href = f;
+            //location.reload();
+        })
     });
 });

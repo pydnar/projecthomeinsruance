@@ -1,48 +1,17 @@
-// Make sure we wait to attach our handlers until the DOM is fully loaded.
-// Why doens't this work
-$(document).ready(function() {
-  $("#registerbtn").on("click", function(event) {
-    // Make sure to preventDefault on a submit event.
-    event.preventDefault();
+// // Make sure we wait to attach our handlers until the DOM is fully loaded.
+// // Why doens't this work
+// $(document).ready(function () {
 
-    var newUser = {
-      id_email: $("#email")
-        .val()
-        .trim(),
-      firstname: $("#first")
-        .val()
-        .trim(),
-      lastname: $("#last")
-        .val()
-        .trim(),
-      phone: $("#phone")
-        .val()
-        .trim(),
-      address: $("#address")
-        .val()
-        .trim(),
-      isagent: 1,
-      userpassword: $("#password1")
-        .val()
-        .trim(),
-      useractive: 0
-    };
+//   var firebaseConfig = {
+//     apiKey: "AIzaSyBa96oWMfmbWVq09zsFd90703oO_VSJtck",
+//     authDomain: "project2auth.firebaseapp.com",
+//     databaseURL: "https://project2auth.firebaseio.com",
+//     projectId: "project2auth",
+//     storageBucket: "project2auth.appspot.com",
+//     messagingSenderId: "784148365615"
+//   };
 
-    $("#currentuser").text(newUser.firstname);
-    $.ajax("/api/newuser", {
-      type: "POST",
-      data: newUser
-    }).then(function(res) {
-      f =
-        "/users/" +
-        $("#email")
-          .val()
-          .trim();
+//   firebase.initializeApp(firebaseConfig);
 
-      console.log(newUser.firstname);
-     
-       window.location.href = f;
-      //location.reload();
-    });
-  });
-});
+  
+// });
