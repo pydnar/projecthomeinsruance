@@ -12,13 +12,20 @@ th {
 
 } 
 
-table, th, td {
+ table, th, td {
    border: 1px solid black;
-}
+} 
 img {
  width:30px;
  height:30px;
 }
+
+table { 
+  width: 500px;
+ }
+td { 
+  width: 100%;
+ }​
 /* li.hidden {
     display: none;
 } */

@@ -9,7 +9,8 @@ router.get("/assetms", function (req, res) {
   res.render("assetms");
 })
 
-router.post("/assetms", function (req, res) {
+router.post("/api/assetms", function (req, res) {
+  console.log(Object.keys(req.body));
   assets.create([Object.keys(req.body)], [Object.values(req.body)], function (result) {
     var assetdata = {
       assets: result
