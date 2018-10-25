@@ -9,6 +9,16 @@ router.get("/assetms", function (req, res) {
   res.render("assetms");
 })
 
+router.put("/api/assetms", function (req, res) {
+  assets.update([Object.keys(req.body)], [Object.values(req.body)], function (result) {
+    var assetdata = {
+      assets: result
+    }
+    console.log(assetdata);
+    res.render("/users/" + assetdata.id_email);
+  })
+})
+
 router.post("/api/assetms", function (req, res) {
   console.log(Object.keys(req.body));
   assets.create([Object.keys(req.body)], [Object.values(req.body)], function (result) {
@@ -103,6 +113,31 @@ router.put("/api/assets/:id/:switch", function (req, res) {
     }
   });
 });
+
+router.get("/api/asset/:id", function (req, res) {
+  var id = req.params.id;
+  assets.selectOne(id, function (data) {
+    console.log(data);
+    var asset = {
+      assets: data
+    }
+    console.log(asset);
+    res.json(asset);
+  });
+});
+
+router.get("/asset/:id", function (req, res) {
+  var id = req.params.id;
+  assets.selectOne(id, function (data) {
+    console.log(data);
+    var asset = {
+      assets: data
+    }
+    console.log(asset);
+    res.render("assetms", data[0]);
+  });
+});
+
 
 router.post("/api/assets/:itemName/:custunitvalue/:id_email/:quantity", function (req, res) {
   assets.create(Object.keys(req.params),

@@ -1,18 +1,19 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
 
-$(document).ready(function() {
-  $(".delete").on("click", function(event) {
+$(document).ready(function () {
+  $(".delete").on("click", function (event) {
     var id = $(this).data("id");
 
     $.ajax("/api/assets/" + id + "/" + 0, {
       type: "PUT",
       value: 0
-    }).then(function() {
+    }).then(function () {
       location.reload();
     });
   });
 
-  $(".send").on("submit", function(event) {
+
+  $(".send").on("submit", function (event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
 
@@ -34,7 +35,9 @@ $(document).ready(function() {
       custunitvalue: $("#unit")
         .val()
         .trim(),
-      id_email: "admin@admin.com",
+      id_email: $("#email")
+        .val()
+        .trim(),
       quantity: $("#qu")
         .val()
         .trim(),
@@ -51,7 +54,7 @@ $(document).ready(function() {
       $.ajax("/api/assetms", {
         type: "POST",
         data: newItem
-      }).then(function() {
+      }).then(function () {
         console.log(Object.keys(newItem).length);
         if (Object.keys(newItem).length !== 0) {
           window.location.href = "/users/" + newItem.id_email;
@@ -62,5 +65,32 @@ $(document).ready(function() {
         // Reload the page to get the updated list
       });
     }
+
+    if (newItem.itemname !== "") { }
+  });
+
+  $(".update").on("submit", function (event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+    alert($(this).data("id"));
+    var getItem = {
+      // id: $(this).data("id"),
+      // itemname: $(this).data("itemname"),
+      // totalcustvalue: $(this).data("totalcustvalue"),
+      // image: $(this).data("image")
+    }
+    alert(Object.values(getItem));
+    alert('update button selected');
+    // Send the POST request.
+
+    $.ajax("/api/asset/" + getItem.id, {
+      type: "PUT",
+      data: getItem
+    }).then(function () {
+      console.log(Object.keys(getItem).length);
+      location.assign("/");
+
+      // Reload the page to get the updated list
+    });
   });
 });

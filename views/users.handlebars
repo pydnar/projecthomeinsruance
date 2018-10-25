@@ -6,30 +6,30 @@
 
 			{{!-- {{#each users}} {{users/assets }} {{/each}} --}}
 
-			<td><button href="assetms" id="create" type="submit" class=" waves-effect waves-light btn-small green" data-id="{{this.id}}">ADD</button></td>
 			<hr>
+			<form class="update">
+				<table class="bordered highlight responsive-table">
+					<tr>
 
-			<table class="bordered highlight responsive-table">
-				<tr>
-
-					<th>ITEM</th>
-					<th>PRICE</th>
-					<th>IMG</th>
-					<th></th>
-					<th></th>
+						<th>ITEM</th>
+						<th>PRICE</th>
+						<th>IMG</th>
+						<th></th>
+						<th></th>
 
 
-				</tr>
-				<tbody>
+					</tr>
+					<tbody>
 
-					{{#each users}}
-					<tr>{{> users/assets}}</tr>
-					{{/each}} {{!-- {{#each users}}
-					<tr>{{> users/userinfo}}</tr>
-					{{/each}} --}}
+						{{#each users}}
+						<tr id="{{this.id}}">{{> users/assets}}</tr>
+						{{/each}} {{!-- {{#each users}}
+						<tr>{{> users/userinfo}}</tr>
+						{{/each}} --}}
 
-				</tbody>
-			</table>
+					</tbody>
+				</table>
+			</form>
 		</div>
 	</div>
 </div>
@@ -41,4 +41,5 @@
 	document.getElementById("userprofile").innerHTML = localStorage.getItem("EMAIL");
 </script>
 
-{{!-- $("#login").css("display", "none"); $("#agent").css("display", "none"); $("#register").css("display", "none"); --}}
+{{!-- $("#login").css("display", "none"); $("#agent").css("display", "none"); $("#register").css("display", "none");
+--}}
