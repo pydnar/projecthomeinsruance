@@ -103,29 +103,59 @@ router.put("/api/assets/:id/:switch", function (req, res) {
   });
 });
 
-router.put("/api/assets/:itemName/:custunitvalue/:id_email/:quantity", function (req, res){
-  assets.update(Object.keys(req.params), Object.values(req.params), function (data) {
-    var assets = {
-      homeassets: data
-    };
-    res.render("assets", assets);
-  })
+// router.put("/api/assets/:itemName/:custunitvalue/:id_email/:quantity", function (req, res){
+//   assets.update(Object.keys(req.params), Object.values(req.params), function (data) {
+//     var assets = {
+//       homeassets: data
+//     };
+//     res.render("assets", assets);
+//   })
+// })
+// Randy commented this.
+
+router.put("/api/assets", function (req, res) {
+  assets.update(req.body)
 })
 
-router.post("/api/assets/:itemName/:custunitvalue/:id_email/:quantity", function (req, res) {
-  assets.create(Object.keys(req.params),
-    Object.values(req.params), function (data) {
-      var assets = {
-        homeassets: data
-      };
+// router.post("/api/assets/:itemName/:custunitvalue/:id_email/:quantity", function (req, res) {
+//   assets.create(Object.keys(req.params),
+//     Object.values(req.params), function (data) {
+//       var assets = {
+//         homeassets: data
+//       };
 
-      // itemname: req.params.itemName,
-      // unitvalue: req.params.custunitvalue,
-      // email: req.params.id_email,
-      // quantity: req.params.quantity,
-      console.log(assets);
-      res.render("assets", assets);
-    });
+//       // itemname: req.params.itemName,
+//       // unitvalue: req.params.custunitvalue,
+//       // email: req.params.id_email,
+//       // quantity: req.params.quantity,
+//       console.log(assets);
+//       res.render("assets", assets);
+//     });
+// });
+// Randy commented this.
+
+router.post("/api/assets", function (req, res) {
+  // Log out the req.body
+  console.log(req.body);
+  assets.create({
+    itemname: req.body.itemname,
+    unitvalue: req.body.unitvalue,
+    email: req.body.email,
+    quantity: req.body.qu,
+    image: req.body.image,
+    totalunitvalue: req.body.totalunitvalue
+  }).then(function (assetPost) {
+    res.json(assetPost);
+    // Should we send the user back to another page? In case:
+    // f = "/"
+    // window.location.href = f;
+  })
+  // itemname: req.params.itemName,
+  // unitvalue: req.params.custunitvalue,
+  // email: req.params.id_email,
+  // quantity: req.params.quantity,
+  console.log(assets);
+  res.render("assets", assets);
 });
 
 router.post("/login/:email/:password", function (req, res) {

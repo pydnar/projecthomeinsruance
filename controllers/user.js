@@ -9,6 +9,12 @@ router.get("/register", function(req, res) {
   res.render("register");
 });
 
+// User Profile Route
+
+// router.get("/userprofile", function(req, res) {
+//   res.json();
+// })
+
 router.post("/api/newuser", function(req, res) {
   //  console.log(Object.values(req.body));
   console.log(req.body.id_email);

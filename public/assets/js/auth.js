@@ -1,5 +1,6 @@
 $(document).ready(() => {
     var f = "";
+    var currentuser;
 
     // Config for Firebase App
     var firebaseConfig = {
@@ -30,9 +31,11 @@ $(document).ready(() => {
         //
         firebase.auth().signInWithEmailAndPassword(email, password).then(function () {
             alert('Signin Success')
-            var USER = firebase.auth().currentUser;
-            console.log(Object.keys(USER));
-            console.log(Object.values(USER));
+            var user = firebase.auth().currentUser;
+            currentuser = {
+                email: user.email,
+                uid: user.uid,
+            }
             $.ajax("/login/" + email + "/" + password, {
                 method: "POST",
                 async: false,
@@ -56,9 +59,12 @@ $(document).ready(() => {
     });
 
 
+
     $('#submitSignout').click(function () {
-        auth.signOut().then(function () {
-            console.log("Signout Success for user =>" + USER.email);
+        firebase.auth().signOut().then(function () {
+            alert('You have been logged out');
+            f = "/"
+            window.location.href = f;
         }).catch(function (error) {
             var errorC = error.code;
             var errorM = error.message;
