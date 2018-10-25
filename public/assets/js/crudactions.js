@@ -12,12 +12,10 @@ $(function() {
     });
   });
 
-  $(".create").on("submit", function(event) {
+  $("#create").on("click", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
-    
     var totalunitvalue = parseFloat( $("#qu").val().trim()) *  parseFloat($("#unit").val().trim());
-  
     var newItem = {
       itemname: $("#item").val().trim(),
       unitvalue: $("#unit").val().trim(),

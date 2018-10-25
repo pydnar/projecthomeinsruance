@@ -1,9 +1,11 @@
+{{> users/nav }}
+
 <div class="row">
 	<div class="col s12">
 
 		{{!-- {{#each users}} {{users/assets }} {{/each}} --}}
 	
-		<td><button type="submit" class=" waves-effect waves-light btn-small green" data-id="{{this.id}}">ADD</button></td>
+		<td><button href="assetms" id="create" type="submit" class=" waves-effect waves-light btn-small green" data-id="{{this.id}}">ADD</button></td>
 		 <hr >
 		 
 		<table class="bordered highlight responsive-table">
@@ -31,8 +33,10 @@
 	</div>
 </div>
 <script>
-    $("#login").css("display", "none");
-    $("#agent").css("display", "none");
-    $("#register").css("display", "none");
+  
 </script>
 <script src="/assets/js/crudactions.js"></script>
+
+  {{!-- $("#login").css("display", "none");
+    $("#agent").css("display", "none");
+    $("#register").css("display", "none"); --}}
