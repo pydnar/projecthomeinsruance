@@ -54,6 +54,17 @@ var orm  = {
       callback(result);
     });
   },
+
+  selectOne: function(tablevalue, colToSearch, valOfCol, callback) {
+    var queryString = "SELECT * FROM ?? WHERE ?? = ?";
+    var k = connection.query(queryString, [tablevalue, colToSearch, valOfCol], function(err, result) {
+      if (err) {
+        throw err;
+      }
+      callback(result);
+    });
+  },
+
  selectUser: function(tablevalue, colToSearch, valOfCol, callback) {
     var queryString = "SELECT * FROM ?? WHERE ?? = ?";
     var k = connection.query(queryString, [tablevalue, colToSearch, valOfCol], function(err, result) {

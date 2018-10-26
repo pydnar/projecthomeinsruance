@@ -34,7 +34,7 @@ $(document).ready(function() {
       custunitvalue: $("#unit")
         .val()
         .trim(),
-      id_email: "admin@admin.com",
+      id_email: id_email,
       quantity: $("#qu")
         .val()
         .trim(),
