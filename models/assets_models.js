@@ -27,6 +27,11 @@ var homeassets = {
       cb(res);
     });
   },
+  selectOne: function(id, cb) {
+    orm.selectOne("homeassets", "id", id, function(res) {
+      cb(res);
+    });
+  },
   
     selectUser: function(useremail, cb) {
     orm.selectUser("homeassets", "id_email", useremail, function(res) {

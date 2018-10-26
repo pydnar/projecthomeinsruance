@@ -8,16 +8,15 @@ router.get("/", function(req, res) {
   res.render("index");
 });
 
-router.get("/users", function(req, res) {
-  users.selectWhere("admin@admin.com", function(data) {
-    var assets = {
-      users: data
-    };
+// router.get("/users", function(req, res) {
+//   users.selectWhere("admin@admin.com", function(data) {
+//     var assets = {
+//       users: data
+//     };
     
-
-    res.render("users", assets);
-  });
-});
+//     res.render("users", assets);
+//   });
+// });
 
 // router.get("/agent", function(req, res) {
 //   assets.all(function(data) {

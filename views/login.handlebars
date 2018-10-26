@@ -1,21 +1,23 @@
-<div class="row">
+{{> users/nav }}
+<div class="container">
+    <div class="row">
 
-    <div class="col s12">
+        <div class="col s12">
+            <form id="form_data">
+                <h1>Login</h1>
+                <div class="form-group">
+                    <label for="email">Email address:</label>
+                    <input type="email" class="form-control" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password">
+                </div>
 
-        <form id="form_data" action="/users" method="POST">
-            <h1> Login </h1>
-            <div class="form-group">
-                <label for="email">Email address:</label>
-                <input value="admin@admin.com" type="email" class="form-control" id="email">
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input value="123" type="password" class="form-control" id="password">
-            </div>
-
-            <button id="button" type="submit" class="btn btn-default">Submit</button>
-        </form>
-
+                <button id="submitLogin" type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
     </div>
 </div>
-<script src="/assets/js/login.js"></script>
+
+<script src="/assets/js/auth.js"></script>

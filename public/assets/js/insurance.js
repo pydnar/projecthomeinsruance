@@ -2,7 +2,7 @@
 
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
 $(function() {
-   
+ 
   $(".change-devour").on("click", function(event) {
     console.log("View");
     var id = $(this).data("id");
@@ -16,14 +16,15 @@ $(function() {
     $.ajax("/api/insurance/" + id, {
       type: "PUT",
       data: newDevouredState
-    }).then(
-      function() {
-        console.log("changed to devoured", newDevoured);
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
+    }).then(function() {
+      console.log("changed to devoured", newDevoured);
+      // Reload the page to get the updated list
+      location.reload();
+    });
   });
 
-
+  // ("#boomButton").on("click", function() {
+  //   alert("boom");
+  //
+  // });
 });

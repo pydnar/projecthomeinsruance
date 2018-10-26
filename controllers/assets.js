@@ -4,70 +4,82 @@ var router = express.Router();
 
 var assets = require("../models/assets_models.js");
 
-// router.get("/", function(req, res) {
-//   res.render("index");
-// });
 
-// router.get("/users", function(req, res) {
-//   users.selectWhere("admin@admin.com", function(data) {
-//     var assets = {
-//       users: data
-//     };
-    
+router.get("/assetms", function (req, res) {
+  res.render("assetms");
+});
 
-//     res.render("users", assets);
-//   });
-// });
+router.put("/api/assetms", function (req, res) {
+  assets.update([Object.keys(req.body)], [Object.values(req.body)], function (result) {
+    var assetdata = {
+      assets: result
+    }
+    console.log(assetdata);
+    res.render("/users/" + assetdata.id_email);
+  });
+});
 
-router.get("/assets", function(req, res) {
-  assets.all(function(data) {
+router.post("/api/assetms", function (req, res) {
+  console.log(Object.keys(req.body));
+  assets.create([Object.keys(req.body)], [Object.values(req.body)], function (result) {
+    var assetdata = {
+      assets: result
+    }
+    console.log(assetdata);
+    res.render("/users/" + assetdata.id_email);
+  });
+});
+
+router.get("/assets", function (req, res) {
+  assets.all(function (data) {
     var assets = {
-      users: data
+      homeassets: data
     };
-    console.log(assets)
-
-    
-    // for (var i = 0; i < assets["assets"].length; i++) {
-    //   var pair = assets["assets"][i];
-    //   for (n in pair) {
-    //     //if (email == pair["id_email"] && password === pair["userpassword"]) {
-    //      // holduser.push(assets["users"][i]);
-    //      //  break;
-    //     //}
-    //   }
-    // } //Found user   
+    console.log(assets);
 
     res.render("assets", assets);
   });
 });
 
-router.get("/api/assets", function(req, res) {
-  assets.all(function(data) {
+router.get("/api/assets/", function (req, res) {
+  //Change update value in table itemactive
+
+  var id = req.params.id;
+  console.log(id);
+  assets.all(function (data) {
     var assets = {
-      users: data
+      homeassets: data
     };
-    console.log(assets)
+    console.log(assets);
     for (x in assets) {
       console.log(assets[x]);
     }
-    // for (var i = 0; i < assets["assets"].length; i++) {
-    //   var pair = assets["assets"][i];
-    //   for (n in pair) {
-    //     //if (email == pair["id_email"] && password === pair["userpassword"]) {
-    //      // holduser.push(assets["users"][i]);
-    //      //  break;
-    //     //}
-    //   }
-    // } //Found user   
-
-    res.json(assets["users"]);
-
+    console.log("It  Ran");
+    res.json(assets);
   });
 });
 
-router.get("/users/:email", function(req, res) {
+router.get("/api/assets/:id", function (req, res) {
+  //Change update value in table itemactive
+
+  var id = req.params.id;
+  console.log(id);
+  assets.all(function (data) {
+    var assets = {
+      homeassets: data
+    };
+    console.log(assets);
+    for (x in assets) {
+      console.log(assets[x]);
+    }
+    console.log("It  Ran");
+    res.json(assets);
+  });
+});
+
+router.get("/users/:email", function (req, res) {
   var email = req.params.email;
-  users.selectWhere(email, function(data) {
+  users.selectWhere(email, function (data) {
     var assets = {
       users: data
     };
@@ -76,8 +88,8 @@ router.get("/users/:email", function(req, res) {
   });
 });
 
-router.get("/login", function(req, res) {
-  users.all(function(data) {
+router.get("/login", function (req, res) {
+  users.all(function (data) {
     var insuranceObject = {
       users: data
     };
@@ -86,12 +98,67 @@ router.get("/login", function(req, res) {
   });
 });
 
-router.post("/login/:email/:password", function(req, res) {
+router.put("/api/assets/:id/:switch", function (req, res) {
+  var condition = "id = " + req.params.id;
+  var isactive = req.params.switch;
+  console.log("condition", condition);
+  assets.update({
+    itemactive: isactive
+  }, condition, function (result) {
+    if (result.changedRows == 0) {
+      // If no rows were changed, then the ID must not exist, so 404
+      return res.status(404).end();
+    } else {
+      res.status(200).end();
+    }
+  });
+});
+router.get("/api/asset/:id", function (req, res) {
+  var id = req.params.id;
+  assets.selectOne(id, function (data) {
+    console.log(data);
+    var asset = {
+      assets: data
+    }
+    console.log(asset);
+    res.json(asset);
+  });
+});
+
+router.get("/asset/:id", function (req, res) {
+  var id = req.params.id;
+  assets.selectOne(id, function (data) {
+    console.log(data);
+    var asset = {
+      assets: data
+    }
+    console.log(asset);
+    res.render("assetms", data[0]);
+  });
+});
+
+router.post("/api/assets/:itemName/:custunitvalue/:id_email/:quantity", function (req, res) {
+  assets.create(Object.keys(req.params),
+    Object.values(req.params), function (data) {
+      var assets = {
+        homeassets: data
+      };
+
+      // itemname: req.params.itemName,
+      // unitvalue: req.params.custunitvalue,
+      // email: req.params.id_email,
+      // quantity: req.params.quantity,
+      console.log(assets);
+      res.render("assets", assets);
+    });
+});
+
+router.post("/login/:email/:password", function (req, res) {
   var email = req.params.email;
   var password = req.params.password;
 
   var holduser = [];
-  users.all(function(data) {
+  users.all(function (data) {
     var insuranceObject = {
       users: data
     };
@@ -107,7 +174,7 @@ router.post("/login/:email/:password", function(req, res) {
     } //Found user
     //Now find homeassets
   });
-  users.all(function(data) {
+  users.all(function (data) {
     var assetsObject = {
       homeassets: data
     };

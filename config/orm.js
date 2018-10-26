@@ -1,5 +1,5 @@
 var connection = require("../config/connection.js");
-//console.log(connection);
+
 function printQuestionMarksHelper(num) {
  
   var arr = [];
@@ -54,6 +54,17 @@ var orm  = {
       callback(result);
     });
   },
+
+  selectOne: function(tablevalue, colToSearch, valOfCol, callback) {
+    var queryString = "SELECT * FROM ?? WHERE ?? = ?";
+    var k = connection.query(queryString, [tablevalue, colToSearch, valOfCol], function(err, result) {
+      if (err) {
+        throw err;
+      }
+      callback(result);
+    });
+  },
+
  selectUser: function(tablevalue, colToSearch, valOfCol, callback) {
     var queryString = "SELECT * FROM ?? WHERE ?? = ?";
     var k = connection.query(queryString, [tablevalue, colToSearch, valOfCol], function(err, result) {
@@ -68,7 +79,8 @@ var orm  = {
   create: function(table, cols, vals, callback) {
      
     var queryString = "INSERT INTO " + table;
-
+    console.log(`col:\n${cols}`);
+    console.log(`val:\n${vals}`);
     queryString += " (";
     queryString += cols.toString();
     queryString += ") ";
@@ -76,7 +88,7 @@ var orm  = {
     queryString += printQuestionMarksHelper(vals.length);
     queryString += ") ";
 
-    //console.log(`${vals}`);
+    console.log(`${queryString}`);
 
     connection.query(queryString, vals, function(err, result) {
       if (err) {
@@ -128,16 +140,15 @@ var orm  = {
     });
   },
   
-  joinselectOne: function(table1col1, table2col1, table2col2, table2forightkey, table1primarykey, table1, table2, condition, callback){
-    var queryString = "SELECT ??.??, ??.??, ??.??, ??.?? FROM ?? JOIN ?? on ??.??=??.?? WHERE ??.??=?";
-    var k = connection.query(queryString, [table2, table2col1,table2, table2col2, table2,table2forightkey, table1, table1col1, table1, table2, table1, table1primarykey, table2, table2forightkey, table1, table1primarykey, condition], function(err, result) {
+  joinselectOne: function(table1col1, table1col2, table1col3, table2col1, table2col2, table2forightkey, table1primarykey, table1, table2, condition, callback){
+    var queryString = "SELECT ??.??, ??.??, ??.??, ??.??, ??.??, ??. ?? FROM ?? JOIN ?? on ??.??=??.?? WHERE ??.??=?";
+    var k = connection.query(queryString, [table2, table2col1,table2, table2col2, table2,table2forightkey, table1, table1col1, table1, table1col2, table1, table1col3, table1, table2, table1, table1primarykey, table2, table2forightkey, table1, table1primarykey, condition], function(err, result) {
       if (err) {
         throw err;
       }
       callback(result);
     });
   },
-
 
 };
 

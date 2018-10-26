@@ -1,10 +1,8 @@
-<td>{{this.image}}</td>
+ {{!--class="materialize" --}} 
+ {{#if this.itemactive}}
 <td>{{this.itemname}}</td>
 <td>{{this.totalcustvalue}}</td>
-<td><button type="submit" class="btn btn-success" id={{this.id}}>Update</button></td>
-
-
-
-
-
-  {{!-- User need to see home assets here --}}
+<td><img src={{this.image}} class="materialboxed"></td>
+<td><button type="submit" class="delete waves-effect waves-light btn-small red darken-2" data-id="{{this.id}}">DELETE</button></td>
+<td><button type="submit" class=" waves-effect waves-light btn-small yellow darken-4" data-id="{{this.id}}">EDIT</button></td>
+{{else}} {{/if}}
