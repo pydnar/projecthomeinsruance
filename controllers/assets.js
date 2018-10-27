@@ -8,9 +8,40 @@ router.get("/assetms", function(req, res) {
   res.render("assetms");
 });
 
-// router.get("/home", function(req, res) {
-//      res.render("home", assets);
+// router.get("/edit/:id", function(req, res) {
+//   //Change update value in table itemactive
+
+//   var id = req.params.id;
+//   console.log(id);
+//   assets.selectOne([id], function(data) {
+//     var assets = {
+//       homeassets: data
+//     };
+//     console.log(data);
+ 
+//     console.log("It  Ran");
+
+//     res.json(assets);
+//   });
 // });
+
+router.get("/edit/:id", function(req, res) {
+  //Change update value in table itemactive
+
+  var id = req.params.id;
+  console.log(id);
+  assets.selectOne([id], function(data) {
+    var assets = {
+      homeassets: data
+    };
+    console.log(data);
+ 
+    console.log("It  Ran");
+
+    res.render("edit",assets);
+  });
+});
+
 router.get("/api/home/:email", function(req, res) {
   var email = req.params.email;
   console.log(email);
@@ -100,7 +131,7 @@ router.get("/api/assets/:id", function(req, res) {
 
   var id = req.params.id;
   console.log(id);
-  assets.all(function(data) {
+  assets.selectWhere([id],function(data) {
     var assets = {
       homeassets: data
     };
@@ -109,6 +140,23 @@ router.get("/api/assets/:id", function(req, res) {
       console.log(assets[x]);
     }
     console.log("It  Ran");
+    res.json(assets);
+  });
+});
+
+router.get("/edit/:id", function(req, res) {
+  //Change update value in table itemactive
+
+  var id = req.params.id;
+  console.log(id);
+  assets.selectOne([id], function(data) {
+    var assets = {
+      homeassets: data
+    };
+    console.log(data);
+ 
+    console.log("It  Ran");
+
     res.json(assets);
   });
 });
