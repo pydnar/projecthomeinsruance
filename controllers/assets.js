@@ -35,28 +35,34 @@ router.get("/home/:email", function(req, res) {
   });
 });
 
-router.put("/api/assetms", function(req, res) {
-  assets.update([Object.keys(req.body)], [Object.values(req.body)], function(
-    result
-  ) {
-    var assetdata = {
-      assets: result
-    };
-    console.log(assetdata);
-    res.render("/users/" + assetdata.id_email);
-  });
-});
+// router.put("/api/assetms", function(req, res) {
+//   console.log(Object.keys(req.body))
+//   assets.update([Object.keys(req.body)], [Object.values(req.body)], function(
+//     result
+//   ) {
+//     var assetdata = {
+//       assets: result
+//     };
+ 
+//     res.render("/home/" + assetdata.id_email);
+//   });
+// });
 
 router.post("/api/assetms", function(req, res) {
-  console.log(Object.keys(req.body));
+  
+  console.log("KEY");
+  var email = Object.values(req.body);
+
+  console.log(email[2]);
+  console.log("END");
   assets.create([Object.keys(req.body)], [Object.values(req.body)], function(
     result
   ) {
     var assetdata = {
       assets: result
     };
-    console.log(assetdata);
-    res.render("/users/" + assetdata.id_email);
+
+    res.json("/home/" + email[2]);
   });
 });
 
