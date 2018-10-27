@@ -5,13 +5,36 @@
         <div class="col s12">
             <h3>HOME</h3>
             <div id="username"></div>
-            
+
         </div>
+
         <a class="btn btn-default" id="add" href="/assetms">Add New Item</a>
+        <a class="btn btn-default viewitems">View items</a>
+
+        <table class="bordered highlight responsive-table">
+            <tr>
+
+                <th>ITEM</th>
+                <th>PRICE</th>
+                <th>IMG</th>
+                <th></th>
+                <th></th>
+
+
+            </tr>
+            <tbody>
+
+                {{#each homeassets}}
+                <tr id="{{this.id}}">{{> users/assets}}</tr>
+                {{/each}}
+
+            </tbody>
+        </table>
+
 
     </div>
 </div>
 
-<script src="/assets/js/auth.js">
+<script src="/assets/js/crudactions.js">
 
 </script>

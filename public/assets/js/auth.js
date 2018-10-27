@@ -37,8 +37,10 @@ $(document).ready(() => {
           email: user.email,
           uid: user.uid
         };
-        alert("Signed in as " + currentuser.email);
+       
         localStorage.setItem("userprofile", currentuser.email);
+        alert(localStorage.getItem("userprofile"));
+
 
         // document.getElementById("username").innerHTML = localStorage.getItem( "userprofile");
 
@@ -54,8 +56,8 @@ $(document).ready(() => {
           //Init values are coming from the login
         }).then(function(res) {
           //   userandassets = res;
-          alert(document.URL);
-          window.location.href = "/home";
+
+          window.location.href = "/home/" + localStorage.getItem("userprofile");
         }); //End of ajax call
       })
       .catch(function(error) {
@@ -69,7 +71,7 @@ $(document).ready(() => {
   $("#submitSignout").click(function() {
     localStorage.removeItem("userprofile");
     $("username").val("");
-    alert("Signed out was " + $("username").val());
+
     firebase
       .auth()
       .signOut()

@@ -8,9 +8,19 @@ router.get("/", function(req, res) {
   res.render("index");
 });
 
-router.get("/home", function(req, res) {
-    res.render("home"); 
-});
+// router.get("/home/:email", function(req, res) {
+//   var email = req.params.email;
+//   users.selectWhere(email, function(data) {
+//     var assets = {
+//       users: data
+//     };
+
+//     res.render("home", assets);
+//   });
+// });
+// router.get("/home", function(req, res) {
+//     res.render("home");
+// });
 
 router.get("/users/:email", function(req, res) {
   var email = req.params.email;
