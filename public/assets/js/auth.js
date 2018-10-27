@@ -1,5 +1,4 @@
 $(document).ready(() => {
-
   var currentuser;
 
   // Config for Firebase App
@@ -38,16 +37,11 @@ $(document).ready(() => {
           email: user.email,
           uid: user.uid
         };
+        alert("Signed in as " + currentuser.email);
+        localStorage.setItem("userprofile", currentuser.email);
 
-        if (typeof Storage !== "undefined") {
-          // Code for localStorage/sessionStorage.
-          localStorage.setItem("userprofile", user.email);
+        // document.getElementById("username").innerHTML = localStorage.getItem( "userprofile");
 
-          $("#login").css("display", "none");
-          document.getElementById("login").innerHTML = "";
-        } else {
-          // Sorry! No Web Storage support..
-        }
         // Store
 
         // Retrieve
@@ -59,15 +53,8 @@ $(document).ready(() => {
           data: values
           //Init values are coming from the login
         }).then(function(res) {
-          userandassets = res;
-          console.log(userandassets);
-          for (n in userandassets) {
-            f = "/users/" + localStorage.getItem("userprofile");
-
-            $("#loginAlert").text(
-              "There is no user record corresponding to this"
-            );
-          }
+          //   userandassets = res;
+          alert(document.URL);
           window.location.href = "/home";
         }); //End of ajax call
       })
@@ -80,14 +67,15 @@ $(document).ready(() => {
   });
 
   $("#submitSignout").click(function() {
+    localStorage.removeItem("userprofile");
+    $("username").val("");
+    alert("Signed out was " + $("username").val());
     firebase
       .auth()
       .signOut()
       .then(function() {
         // alert("You have been logged out");
-        localStorage.setItem("userprofile", "");
 
-     
         window.location.href = "/";
       })
       .catch(function(error) {
@@ -142,7 +130,7 @@ $(document).ready(() => {
         });
 
       console.log(newUser.firstname);
-    
+
       window.location.href = "/";
       //location.reload();
     });

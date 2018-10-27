@@ -9,7 +9,7 @@ router.get("/", function(req, res) {
 });
 
 router.get("/home", function(req, res) {
-  res.render("home");
+    res.render("home"); 
 });
 
 router.get("/users/:email", function(req, res) {
