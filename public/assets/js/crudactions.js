@@ -21,13 +21,12 @@ $(document).ready(function() {
     $("#image").val("");
   });
   $("#done").on("click", function(event) {
- 
     window.location.href = "/home/" + localStorage.getItem("userprofile");
   });
 
   $(".delete").on("click", function(event) {
     var id = $(this).data("id");
-
+    event.preventDefault();
     $.ajax("/api/assets/" + id + "/" + 0, {
       type: "PUT",
       value: 0
