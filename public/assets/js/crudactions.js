@@ -5,12 +5,24 @@ $(document).ready(function() {
     var id = $(this).data("id");
     alert(localStorage.getItem("userprofile"));
     $.ajax("/api/home/" + localStorage.getItem("userprofile"), {
-      type: "GET",
+      type: "GET"
     }).then(function(r) {
       console.log(r);
       alert(r);
       //location.reload();
     });
+  });
+
+  $("#cancel").on("click", function(event) {
+    //clear Text boxes here
+    $("#item").val("");
+    $("#unit").val("");
+    $("#qu").val("");
+    $("#image").val("");
+  });
+  $("#done").on("click", function(event) {
+ 
+    window.location.href = "/home/" + localStorage.getItem("userprofile");
   });
 
   $(".delete").on("click", function(event) {
@@ -26,6 +38,7 @@ $(document).ready(function() {
 
   $(".send").on("submit", function(event) {
     // Make sure to preventDefault on a submit event.
+
     event.preventDefault();
 
     var totalunitvalue =
@@ -46,7 +59,7 @@ $(document).ready(function() {
       custunitvalue: $("#unit")
         .val()
         .trim(),
-      id_email: id_email,
+      id_email: localStorage.getItem("userprofile"),
       quantity: $("#qu")
         .val()
         .trim(),
@@ -56,23 +69,17 @@ $(document).ready(function() {
       totalcustvalue: totalunitvalue
     };
 
-    console.log(newItem);
     // Send the POST request.
-
-    if (newItem.itemname !== "") {
-      $.ajax("/api/assetms", {
-        type: "POST",
-        data: newItem
-      }).then(function() {
-        console.log(Object.keys(newItem).length);
-        if (Object.keys(newItem).length !== 0) {
-          window.location.href = "/users/" + newItem.id_email;
-        } else {
-          location.reload();
-        }
-
-        // Reload the page to get the updated list
-      });
-    }
+    // $("#item").val("");
+    // $("#unit").val("");
+    // $("#qu").val("");
+    // $("#image").val("");
+    $.ajax("/api/assetms", {
+      type: "POST",
+      data: newItem
+    }).then(function() {
+      // Reload the page to get the updated list
+      location.reload();
+    });
   });
 });
