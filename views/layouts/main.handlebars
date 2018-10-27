@@ -21,12 +21,35 @@
 
 </head>
 
-
 <body>
     {{{ body }}}
 
 </body>
 
 </html>
+<script>
+    document.getElementById("userprofile").innerHTML = localStorage.getItem("userprofile");
+    document.getElementById("submitSignout").innerHTML = localStorage.getItem("logout");
 
 
+    $(document).ready(function () {
+        document.getElementById("login").innerHTML = "LOGIN";
+        document.getElementById("submitSignout").innerHTML = "";
+        $("#login").on("click", function (event) {
+            document.getElementById("login").innerHTML = "";
+            document.getElementById("login").innerHTML = "LOGOUT";
+            document.getElementById("add").innerHTML = "";
+
+        });
+        $("#submitSignout").on("click", function (event) {
+            document.getElementById("login").innerHTML = "";
+            document.getElementById("add").innerHTML = "ADD";
+
+            
+            document.getElementById("userprofile").innerHTML = localStorage.getItem("userprofile");
+
+
+        });
+    });
+
+</script>
