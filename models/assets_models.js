@@ -19,6 +19,11 @@ var homeassets = {
       cb(res);
     });
   },
+  softDelete: function(itemactive,condition, cb) {
+    orm.softDelete("homeassets", itemactive, condition, function(res) {
+      cb(res);
+    });
+  },
   delete: function(condition, cb) {
     orm.delete("homeassets", condition, function(res) {
       cb(res);

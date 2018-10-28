@@ -118,7 +118,7 @@ var orm = {
       if (objColVals.length - 1 !== n) {
         makestring += objColVals[n] + "='" + objVals[n] + "',";
       } else {
-        makestring += objColVals[n] + "='" + objVals[n]+"'";
+        makestring += objColVals[n] + "='" + objVals[n] + "'";
       }
     }
 
@@ -154,6 +154,25 @@ var orm = {
     });
   },
 
+  softDelete: function(table, objColVals, condition, callback) {
+    console.log("We are vemon");
+    var queryString = "UPDATE " + table;
+
+    queryString += " SET ";
+    queryString += objColVals+="=0";
+    queryString += " WHERE id=";
+    queryString += condition;
+
+    console.log(queryString);
+    console.log("Look up");
+
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+      callback(result);
+    });
+  },
   joinselect: function(
     table1col1,
     table2col1,

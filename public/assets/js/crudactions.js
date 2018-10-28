@@ -1,10 +1,9 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
- localStorage.removeItem("submitSignout");
 $(document).ready(function() {
   $(".viewitems").on("click", function(event) {
     var id = $(this).data("id");
     alert(localStorage.getItem("userprofile"));
-   
+
     $.ajax("/api/home/" + localStorage.getItem("userprofile"), {
       type: "GET"
     }).then(function(r) {
@@ -26,18 +25,20 @@ $(document).ready(function() {
   });
 
   $(".delete").on("click", function(event) {
-    var id = $(this).data("id");
     event.preventDefault();
-    $.ajax("/api/assets/" + id + "/" + 0, {
+
+    var id = $(this).data("id");
+
+
+    $.ajax("/api/remove/" + id + "/" + 0, {
       type: "PUT",
       value: 0
-    }).then(function () {
+    }).then(function() {
       location.reload();
     });
   });
 
-
-  $(".send").on("submit", function (event) {
+  $(".send").on("submit", function(event) {
     // Make sure to preventDefault on a submit event.
 
     event.preventDefault();
@@ -122,10 +123,8 @@ $(document).ready(function() {
       type: "PUT",
       data: newItem
     }).then(function() {
-    
       // Reload the page to get the updated list
-     
     });
-     window.location.href = "/home/" + localStorage.getItem("userprofile");
+    window.location.href = "/home/" + localStorage.getItem("userprofile");
   });
 });

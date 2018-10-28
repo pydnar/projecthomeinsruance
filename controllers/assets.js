@@ -4,6 +4,21 @@ var router = express.Router();
 
 var assets = require("../models/assets_models.js");
 
+router.put("/api/remove/:id/:switch", function(req, res) {
+  console.log("put!!");
+  var id = req.params.id;
+  console.log(req.params.id);
+
+  assets.softDelete("itemactive",req.params.id, function(data) {
+   
+    var asset = {
+      assets: data
+    };
+    console.log(asset);
+    res.json(asset);
+  });
+});
+
 router.put("/api/update", function(req, res) {
   var transformlist = [];
   var val = [];
@@ -181,11 +196,7 @@ router.put("/api/assets/:id/:switch", function(req, res) {
   var condition = "id = " + req.params.id;
   var isactive = req.params.switch;
 
-  assets.update(
-    {
-      itemactive: isactive
-    },
-    condition,
+  assets.softDelete({itemactive: isactive},condition,
     function(result) {
       if (result.changedRows == 0) {
         // If no rows were changed, then the ID must not exist, so 404
