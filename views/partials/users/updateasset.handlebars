@@ -1,31 +1,27 @@
+<h1>
+  Update the quote with an id of {{this.id}}</h1>
+<form data-id="{{this.id}}" class="update-asset">
+  <h1>Add Assets </h1>
+  <div class="form-group">
+    <label for="first">Item Name </label>
+    <input value="{{this.itemname}}" type="text" class="form-control" id="item">
+  </div>
+  <div class="form-group">
+    <label for="last">Unit Price</label>
+    <input value="{{this.custunitvalue}}" type="text" class="form-control" id="unit">
+  </div>
 
-			<h1>Update the quote with an id of {{this.id}}</h1>
-			<form data-id="{{this.id}}" class="update-form">
-				<h1>Add Assets </h1>
-				<div class="form-group">
-					<label for="first">Item Name </label>
-					<input value="{{this.itemname}}" type="text" class="form-control" id="item">
-				</div>
-				<div class="form-group">
-					<label for="last">Unit Price</label>
-					 <input value="{{this.custunitvalue}}" type="text" class="form-control" id="unit"> 
-				</div>
-				<div class="form-group">
-					<label for="last">Your value Price</label>
-					 <input value="{{this.totalcustvalue}}" type="text" class="form-control" id="cvalue"> 
-				</div>
+  <div class="form-group">
+    <label for="phone">Quantity</label>
+    <input value="{{this.quantity}}" type="text" class="form-control" id="qu">
+  </div>
+  <div class="form-group">
+    <label for="phone">Image</label>
+    <input value="{{this.image}}" type="text" class="form-control" id="image">
+  </div>
 
-				<div class="form-group">
-					<label for="phone">Quantity</label>
-					<input  value="{{this.quantity}}" type="text" class="form-control" id="qu">
-				</div>
-				<div class="form-group">
-					<label for="phone">Image</label>
-				<input value="{{this.image}}" type="text" class="form-control" id="image">
-				</div>
+  <button type="submit" class="btn btn-default">Submit</button>
+  <a id="done" class="btn btn-default">{{this.id_email}}</a>
+  <a id="cancel" class="btn btn-default">Cancel</a>
 
-				<button type="submit" class="btn btn-default">Submit</button>
-				<a  id="done" class="btn btn-default">Done</a>
-				<a id="cancel" class="btn btn-default">Cancel</a>
-
-			</form>
+</form>
