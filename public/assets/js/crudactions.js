@@ -19,6 +19,7 @@ $(document).ready(function() {
     $("#unit").val("");
     $("#qu").val("");
     $("#image").val("");
+    window.location.href = "/home/" + localStorage.getItem("userprofile");
   });
   $("#done").on("click", function(event) {
     window.location.href = "/home/" + localStorage.getItem("userprofile");
@@ -28,7 +29,6 @@ $(document).ready(function() {
     event.preventDefault();
 
     var id = $(this).data("id");
-
 
     $.ajax("/api/remove/" + id + "/" + 0, {
       type: "PUT",
