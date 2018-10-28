@@ -1,7 +1,7 @@
   {{#if itemactive}}
 <td>{{this.itemname}}</td>
 <td>{{this.totalcustvalue}}</td>
-<td><img src={{this.image}} class="materialboxed"></td>
+<td id="sizeofimage"><img src={{this.image}} class="materialboxed"></td>
 <td><button type="submit" class="delete waves-effect waves-light btn-small red darken-2" data-id="{{this.id}}">DELETE</button></td>
 <td><a  href="/edit/{{this.id}}" class=" waves-effect waves-light btn-small yellow darken-4" data-id="{{this.id}}">EDIT</a></td>
 {{else}} {{/if}} 
