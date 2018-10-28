@@ -81,4 +81,49 @@ $(document).ready(function() {
       location.reload();
     });
   });
+
+  $(".update-asset").on("submit", function(event) {
+    // Make sure to preventDefault on a submit event.
+
+    event.preventDefault();
+    var id = $(this).data("id");
+
+    var totalunitvalue =
+      parseFloat(
+        $("#qu")
+          .val()
+          .trim()
+      ) *
+      parseFloat(
+        $("#unit")
+          .val()
+          .trim()
+      );
+    var newItem = {
+      itemname: $("#item")
+        .val()
+        .trim(),
+      custunitvalue: $("#unit")
+        .val()
+        .trim(),
+      quantity: $("#qu")
+        .val()
+        .trim(),
+      // image: $("#image")
+      //   .val()
+      //   .trim(),
+      totalcustvalue: totalunitvalue,
+      id: $(this).data("id")
+    };
+    console.log(newItem);
+    $.ajax("/api/update/", {
+      type: "PUT",
+      data: newItem
+    }).then(function() {
+    
+      // Reload the page to get the updated list
+     
+    });
+     window.location.href = "/home/" + localStorage.getItem("userprofile");
+  });
 });
