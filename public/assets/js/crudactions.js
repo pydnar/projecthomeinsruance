@@ -1,9 +1,32 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
 
-$(document).ready(function () {
-  $(".delete").on("click", function (event) {
+$(document).ready(function() {
+  $(".viewitems").on("click", function(event) {
     var id = $(this).data("id");
+    alert(localStorage.getItem("userprofile"));
+    $.ajax("/api/home/" + localStorage.getItem("userprofile"), {
+      type: "GET"
+    }).then(function(r) {
+      console.log(r);
+      alert(r);
+      //location.reload();
+    });
+  });
 
+  $("#cancel").on("click", function(event) {
+    //clear Text boxes here
+    $("#item").val("");
+    $("#unit").val("");
+    $("#qu").val("");
+    $("#image").val("");
+  });
+  $("#done").on("click", function(event) {
+    window.location.href = "/home/" + localStorage.getItem("userprofile");
+  });
+
+  $(".delete").on("click", function(event) {
+    var id = $(this).data("id");
+    event.preventDefault();
     $.ajax("/api/assets/" + id + "/" + 0, {
       type: "PUT",
       value: 0
@@ -15,6 +38,7 @@ $(document).ready(function () {
 
   $(".send").on("submit", function (event) {
     // Make sure to preventDefault on a submit event.
+
     event.preventDefault();
 
     var totalunitvalue =
@@ -35,9 +59,7 @@ $(document).ready(function () {
       custunitvalue: $("#unit")
         .val()
         .trim(),
-      id_email: $("#email")
-        .val()
-        .trim(),
+      id_email: localStorage.getItem("userprofile"),
       quantity: $("#qu")
         .val()
         .trim(),
@@ -47,50 +69,62 @@ $(document).ready(function () {
       totalcustvalue: totalunitvalue
     };
 
-    console.log(newItem);
     // Send the POST request.
-
-    if (newItem.itemname !== "") {
-      $.ajax("/api/assetms", {
-        type: "POST",
-        data: newItem
-      }).then(function () {
-        console.log(Object.keys(newItem).length);
-        if (Object.keys(newItem).length !== 0) {
-          window.location.href = "/users/" + newItem.id_email;
-        } else {
-          location.reload();
-        }
-
-        // Reload the page to get the updated list
-      });
-    }
-
-    if (newItem.itemname !== "") { }
+    // $("#item").val("");
+    // $("#unit").val("");
+    // $("#qu").val("");
+    // $("#image").val("");
+    $.ajax("/api/assetms", {
+      type: "POST",
+      data: newItem
+    }).then(function() {
+      // Reload the page to get the updated list
+      location.reload();
+    });
   });
 
-  $(".update").on("submit", function (event) {
+  $(".update-asset").on("submit", function(event) {
     // Make sure to preventDefault on a submit event.
+
     event.preventDefault();
-    alert($(this).data("id"));
-    var getItem = {
-      // id: $(this).data("id"),
-      // itemname: $(this).data("itemname"),
-      // totalcustvalue: $(this).data("totalcustvalue"),
-      // image: $(this).data("image")
-    }
-    alert(Object.values(getItem));
-    alert('update button selected');
-    // Send the POST request.
+    var id = $(this).data("id");
 
-    $.ajax("/api/asset/" + getItem.id, {
+    var totalunitvalue =
+      parseFloat(
+        $("#qu")
+          .val()
+          .trim()
+      ) *
+      parseFloat(
+        $("#unit")
+          .val()
+          .trim()
+      );
+    var newItem = {
+      itemname: $("#item")
+        .val()
+        .trim(),
+      custunitvalue: $("#unit")
+        .val()
+        .trim(),
+      quantity: $("#qu")
+        .val()
+        .trim(),
+      // image: $("#image")
+      //   .val()
+      //   .trim(),
+      totalcustvalue: totalunitvalue,
+      id: $(this).data("id")
+    };
+    console.log(newItem);
+    $.ajax("/api/update/", {
       type: "PUT",
-      data: getItem
-    }).then(function () {
-      console.log(Object.keys(getItem).length);
-      location.assign("/");
-
+      data: newItem
+    }).then(function() {
+    
       // Reload the page to get the updated list
+     
     });
+     window.location.href = "/home/" + localStorage.getItem("userprofile");
   });
 });

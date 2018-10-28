@@ -1,11 +1,7 @@
- {{!--class="materialize" --}} 
- {{#if this.itemactive}}
-{{!-- <td data-id="itemname">{{this.itemname}}</td>
-<td data-id="totalcustvalue">{{this.totalcustvalue}}</td>
-<td data-id="image"><img src={{this.image}} class="materialboxed"></td> --}}
+  {{#if itemactive}}
 <td>{{this.itemname}}</td>
 <td>{{this.totalcustvalue}}</td>
 <td><img src={{this.image}} class="materialboxed"></td>
 <td><button type="submit" class="delete waves-effect waves-light btn-small red darken-2" data-id="{{this.id}}">DELETE</button></td>
-<td><button type="submit" class="edit waves-effect waves-light btn-small yellow darken-4" href="{{this.id}}" data-id="{{this.id}}">EDIT</button></td> 
-{{else}} {{/if}}
+<td><a  href="/edit/{{this.id}}" class=" waves-effect waves-light btn-small yellow darken-4" data-id="{{this.id}}">EDIT</a></td>
+{{else}} {{/if}} 

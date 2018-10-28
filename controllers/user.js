@@ -37,26 +37,6 @@ router.post("/api/newuser", function(req, res) {
   });
 });
 
-//router.put("/api/user", function(req, res) {
-
-//Change update value in table itemactive
-
-//   user.create(function(data) {
-//       var userdata = {
-//       email: 'id_email@gmail.com',
-//     };
-//     // var userdata = {
-//     //   user: data
-//     // };
-//     console.log(userdata);
-//     // console.log(user);
-//     // for (x in user) {
-//     //   console.log(user);
-//     // }
-//     // console.log("It Ran");
-//     res.json(user);
-//   });
-// });
 router.get("/api/user/:email", function(req, res) {
   //Change update value in table itemactive
 

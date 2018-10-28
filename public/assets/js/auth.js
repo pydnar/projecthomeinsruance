@@ -1,6 +1,5 @@
 $(document).ready(() => {
-    var f = "";
-    var currentuser;
+  var currentuser;
 
     // Config for Firebase App
     var firebaseConfig = {
@@ -15,107 +14,119 @@ $(document).ready(() => {
     firebase.initializeApp(firebaseConfig);
 
 
-    $('#submitLogin').click(function () {
-        // Grab data from user form
-        event.preventDefault();
-        var email = $('#email').val();
-        console.log(email);
-        var password = $('#password').val();
-        console.log(password);
+    var values = {
+      email,
+      password
+    };
+    //
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(function() {
+        console.log("You are login in");
 
-        var values = {
-            email,
-            password
+        var user = firebase.auth().currentUser;
+        currentuser = {
+          email: user.email,
+          uid: user.uid
         };
-        //
-        firebase.auth().signInWithEmailAndPassword(email, password).then(function () {
-            alert('Signin Success')
-            var user = firebase.auth().currentUser;
-            currentuser = {
-                email: user.email,
-                uid: user.uid,
-            }
-            $.ajax("/login/" + email + "/" + password, {
-                method: "POST",
-                async: false,
+       
+        localStorage.setItem("userprofile", currentuser.email);
+        alert(localStorage.getItem("userprofile"));
 
-                data: values
-                //Init values are coming from the login
-            }).then(function (res) {
-                userandassets = res;
-                console.log(userandassets);
-                for (n in userandassets) {
-                    f = "/users/" + userandassets[n]["id_email"];
-                }
-                window.location.href = f;
-            }); //End of ajax call
-        }).catch(function (error) {
-            var errorC = error.code;
-            var errorM = error.message;
-            console.log(errorC, errorM);
-            $('#loginAlert').text('There is no user record corresponding to this');
+
+        // document.getElementById("username").innerHTML = localStorage.getItem( "userprofile");
+
+        // Store
+
+        // Retrieve
+        // document.getElementById("userprofile").innerHTML = localStorage.getItem("userprofile");
+        $.ajax("/login/" + email + "/" + password, {
+          method: "POST",
+          async: false,
+
+          data: values
+          //Init values are coming from the login
+        }).then(function(res) {
+          //   userandassets = res;
+
+          window.location.href = "/home/" + localStorage.getItem("userprofile");
+        }); //End of ajax call
+      })
+      .catch(function(error) {
+        var errorC = error.code;
+        var errorM = error.message;
+        console.log(errorC, errorM);
+        $("#loginAlert").text("There is no user record corresponding to this");
+      });
+  });
+
+  $("#submitSignout").click(function() {
+    localStorage.removeItem("userprofile");
+    $("username").val("");
+
+    firebase
+      .auth()
+      .signOut()
+      .then(function() {
+        // alert("You have been logged out");
+
+        window.location.href = "/";
+      })
+      .catch(function(error) {
+        var errorC = error.code;
+        var errorM = error.message;
+        console.log(errorC, errorM);
+      });
+  });
+
+  $("#submitSignup").click(function() {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+    var newUser = {
+      id_email: $("#email")
+        .val()
+        .trim(),
+      firstname: $("#first")
+        .val()
+        .trim(),
+      lastname: $("#last")
+        .val()
+        .trim(),
+      phone: $("#phone")
+        .val()
+        .trim(),
+      address: $("#address")
+        .val()
+        .trim(),
+      isagent: 1,
+      userpassword: $("#password")
+        .val()
+        .trim(),
+      useractive: 0
+    };
+    $.ajax("/api/newuser", {
+      type: "POST",
+      data: newUser
+    }).then(function(res) {
+      f =
+        "/users/" +
+        $("#email")
+          .val()
+          .trim();
+
+      // Create new user in firebase now.
+
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(newUser.id_email, newUser.userpassword)
+        .then(function() {
+          alert("new user created");
         });
-    });
 
+      console.log(newUser.firstname);
 
-
-    $('#submitSignout').click(function () {
-        firebase.auth().signOut().then(function () {
-            alert('You have been logged out');
-            f = "/"
-            window.location.href = f;
-        }).catch(function (error) {
-            var errorC = error.code;
-            var errorM = error.message;
-            console.log(errorC, errorM);
-        })
-    });
-
-
-    $('#submitSignup').click(function () {// Make sure to preventDefault on a submit event.
-        event.preventDefault();
-        var newUser = {
-            id_email: $("#email")
-                .val()
-                .trim(),
-            firstname: $("#first")
-                .val()
-                .trim(),
-            lastname: $("#last")
-                .val()
-                .trim(),
-            phone: $("#phone")
-                .val()
-                .trim(),
-            address: $("#address")
-                .val()
-                .trim(),
-            isagent: 1,
-            userpassword: $("#password")
-                .val()
-                .trim(),
-            useractive: 0
-        };
-        $.ajax("/api/newuser", {
-            type: "POST",
-            data: newUser
-        }).then(function (res) {
-            f =
-                "/users/" +
-                $("#email")
-                    .val()
-                    .trim();
-
-            // Create new user in firebase now.
-
-            firebase.auth().createUserWithEmailAndPassword(newUser.id_email, newUser.userpassword).then(function () {
-                alert('new user created');
-            });
-
-            console.log(newUser.firstname);
-
-            window.location.href = f;
-            //location.reload();
-        })
+      window.location.href = "/";
+      //location.reload();
     });
 });
