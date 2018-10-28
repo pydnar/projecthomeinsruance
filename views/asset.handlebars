@@ -3,9 +3,15 @@
 	<div class="row">
 
 		<div class="col s12">
-			
-				<form class="send">
+
+			{{!--
+			<form id="form_data" action="/users" method="POST"> --}}
+				<form class="anything" >
 					<h1>Add Assets </h1>
+					<div class="form-group">
+						<label for="first">Email</label>
+						<input  type="text" class="form-control" id="email">
+					</div>
 					<div class="form-group">
 						<label for="first">Item Name </label>
 						<input value="{{this.itemname}}" type="text" class="form-control" id="item">
@@ -14,7 +20,7 @@
 						<label for="last">Unit Price</label>
 						<input type="text" class="form-control" id="unit">
 					</div>
-
+					
 					<div class="form-group">
 						<label for="phone">Quantity</label>
 						<input type="text" class="form-control" id="qu">
@@ -26,9 +32,7 @@
 
 
 					<button type="submit" class="btn btn-default">Submit</button>
-					<a id="done" class="btn btn-default">Done</a>
-					<a id="cancel" class="btn btn-default">Cancel</a>
-
+					
 				</form>
 
 		</div>

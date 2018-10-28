@@ -23,9 +23,7 @@
 
 						{{#each users}}
 						<tr id="{{this.id}}">{{> users/assets}}</tr>
-						{{/each}} {{!-- {{#each users}}
-						<tr>{{> users/userinfo}}</tr>
-						{{/each}} --}}
+						{{/each}} 
 
 					</tbody>
 				</table>
@@ -34,11 +32,8 @@
 	</div>
 </div>
 
-<script>
 
-</script>
 <script src="/assets/js/crudactions.js">
 	document.getElementById("userprofile").innerHTML = localStorage.getItem("EMAIL");
-</script>
 
-{{!-- {{!-- $("#login").css("display", "none"); $("#agent").css("display", "none"); $("#register").css("display", "none"); --}}
+ </script>

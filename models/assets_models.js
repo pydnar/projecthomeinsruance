@@ -1,4 +1,4 @@
-// Data 
+// Data
 var orm = require("../config/orm.js");
 
 var homeassets = {
@@ -12,8 +12,15 @@ var homeassets = {
       cb(res);
     });
   },
-  update: function(objColVals, condition, cb) {
-    orm.update("homeassets", objColVals, condition, function(res) {
+  update: function(objColVals, vals , condition, cb) {
+   
+    orm.update("homeassets", objColVals, vals, condition, function(res) {
+     
+      cb(res);
+    });
+  },
+  softDelete: function(itemactive,condition, cb) {
+    orm.softDelete("homeassets", itemactive, condition, function(res) {
       cb(res);
     });
   },
@@ -32,8 +39,8 @@ var homeassets = {
       cb(res);
     });
   },
-  
-    selectUser: function(useremail, cb) {
+
+  selectUser: function(useremail, cb) {
     orm.selectUser("homeassets", "id_email", useremail, function(res) {
       cb(res);
     });
@@ -41,4 +48,3 @@ var homeassets = {
 };
 
 module.exports = homeassets;
-
