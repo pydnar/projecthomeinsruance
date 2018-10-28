@@ -1,18 +1,25 @@
 $(document).ready(() => {
   var currentuser;
 
-    // Config for Firebase App
-    var firebaseConfig = {
-        apiKey: "AIzaSyBa96oWMfmbWVq09zsFd90703oO_VSJtck",
-        authDomain: "project2auth.firebaseapp.com",
-        databaseURL: "https://project2auth.firebaseio.com",
-        projectId: "project2auth",
-        storageBucket: "project2auth.appspot.com",
-        messagingSenderId: "784148365615"
-    };
+  // Config for Firebase App
+  var firebaseConfig = {
+    apiKey: "AIzaSyBa96oWMfmbWVq09zsFd90703oO_VSJtck",
+    authDomain: "project2auth.firebaseapp.com",
+    databaseURL: "https://project2auth.firebaseio.com",
+    projectId: "project2auth",
+    storageBucket: "project2auth.appspot.com",
+    messagingSenderId: "784148365615"
+  };
 
-    firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
 
+  $("#submitLogin").click(function() {
+    // Grab data from user form
+    event.preventDefault();
+    var email = $("#email").val();
+    console.log(email);
+    var password = $("#password").val();
+    console.log(password);
 
     var values = {
       email,
@@ -129,4 +136,5 @@ $(document).ready(() => {
       window.location.href = "/";
       //location.reload();
     });
+  });
 });

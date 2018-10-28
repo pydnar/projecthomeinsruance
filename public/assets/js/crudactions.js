@@ -1,9 +1,10 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
-
+ localStorage.removeItem("submitSignout");
 $(document).ready(function() {
   $(".viewitems").on("click", function(event) {
     var id = $(this).data("id");
     alert(localStorage.getItem("userprofile"));
+   
     $.ajax("/api/home/" + localStorage.getItem("userprofile"), {
       type: "GET"
     }).then(function(r) {
