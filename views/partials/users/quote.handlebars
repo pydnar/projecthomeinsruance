@@ -1,0 +1,24 @@
+<h1>
+    Get market value for item with an id of {{this.id}}</h1>
+<form data-id="{{this.id}}" class="quote-asset">
+    <h4>Quote Asset</h4>
+    <table class="bordered highlight responsive-table">
+        <tr>
+
+            <th>ITEM</th>
+            <th>PRICE</th>
+            <th>IMG</th>
+        </tr>
+        <tbody>
+            <td id="quoteitembyName">{{this.itemname}}</td>
+            <td>{{this.totalcustvalue}}</td>
+            <td id="sizeofimage"><img src="{{this.image}}" class="materialboxed"></td>
+        </tbody>
+    </table>
+    <br>
+    <button type="submit" class="btn btn-default">Quote Item</button>
+    <a id="done" class="btn btn-default">Cancel</a>
+
+<span id="retrievedQuote"></span>
+
+</form>

@@ -74,6 +74,18 @@ router.get("/edit/:id", function(req, res) {
   });
 });
 
+router.get("/quote/:id", function(req, res) {
+  //Get id paramter
+  var id = req.params.id;
+
+  assets.selectOne([id], function(data){
+    var assets ={
+      homeassets: data
+    };
+    res.render("quote", assets);
+  });
+});
+
 router.get("/api/home/:email", function(req, res) {
   var email = req.params.email;
   console.log(email);
