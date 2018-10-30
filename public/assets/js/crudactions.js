@@ -95,7 +95,7 @@ $(document).ready(function () {
     alert(quoteItem);
 
     //Now make api call to prosperent API and populate the spanid field.
-    $.ajax("http://api.prosperent.com/api/search?api_key=c0fb9b207a0c050b8ce13200035e473e", {
+    $.ajax("https://api.prosperent.com/api/search?api_key=c0fb9b207a0c050b8ce13200035e473e", {
       type: "GET",
       headers: {
         'Access-Control-Allow-Origin': '*',
